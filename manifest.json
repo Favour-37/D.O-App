@@ -1,0 +1,16 @@
+{
+  "name": "Dominion Outreach",
+  "short_name": "Dominion",
+  "description": "A Generation of Intimacy with the Father",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#7C4DFF",
+  "theme_color": "#7C4DFF",
+  "icons": [
+    {
+      "src": "https://res.cloudinary.com/dxiefklmt/image/upload/q_auto,f_auto/v1774102552/Dominion_Outreach_ft0cc0.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#7C4DFF">
+    <title>Dominion Outreach – A Generation of Intimacy</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="https://res.cloudinary.com/dxiefklmt/image/upload/q_auto,f_auto/v1774102552/Dominion_Outreach_ft0cc0.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ===== DESIGN SYSTEM (matches your website) ===== */
+        :root {
+            --light-bg: #FFFFFF;
+            --light-surface: #F5F5F7;
+            --light-text: #1D1C1E;
+            --light-text-secondary: #86868B;
+            --dark-bg: #000000;
+            --dark-surface: #1C1C1E;
+            --dark-text: #FFFFFF;
+            --dark-text-secondary: #98989D;
+            --primary: #7C4DFF;
+            --primary-dark: #4A1CB9;
+            --secondary: #00C9A7;
+            --gradient-primary: linear-gradient(145deg, #7C4DFF, #B47CFF);
+            --font: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: var(--font);
+            background: var(--light-bg);
+            color: var(--light-text);
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark {
+            background: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        /* Header */
+        .app-header {
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(12px);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        body.dark .app-header {
+            background: rgba(0,0,0,0.8);
+            border-bottom-color: rgba(255,255,255,0.1);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo img {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+        .logo h1 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: inherit;
+        }
+        /* Navigation tabs */
+        .tabs {
+            display: flex;
+            background: rgba(0,0,0,0.05);
+            border-radius: 40px;
+            margin: 16px 20px;
+            padding: 4px;
+        }
+        body.dark .tabs {
+            background: rgba(255,255,255,0.1);
+        }
+        .tab-btn {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border: none;
+            background: transparent;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: inherit;
+        }
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        /* Panels */
+        .panel {
+            display: none;
+            padding: 0 20px 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        .panel.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Cards */
+        .card {
+            background: var(--light-surface);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        body.dark .card {
+            background: var(--dark-surface);
+        }
+        .devotional-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .devotional-date {
+            color: var(--light-text-secondary);
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+        }
+        .devotional-content {
+            line-height: 1.5;
+        }
+        /* Prayer Wall */
+        .prayer-item {
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 12px 0;
+        }
+        body.dark .prayer-item {
+            border-bottom-color: rgba(255,255,255,0.05);
+        }
+        .prayer-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .prayer-text {
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+        }
+        .prayer-meta {
+            font-size: 0.75rem;
+            color: var(--light-text-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .pray-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .pray-button:hover {
+            opacity: 0.8;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: white;
+            font-family: inherit;
+        }
+        body.dark input, body.dark textarea {
+            background: var(--dark-surface);
+            border-color: rgba(255,255,255,0.1);
+            color: white;
+        }
+        button.submit {
+            background: var(--gradient-primary);
+            border: none;
+            padding: 12px;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+        }
+        /* Connect Buttons */
+        .connect-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .connect-btn {
+            background: rgba(124,77,255,0.1);
+            border-radius: 60px;
+            padding: 12px 24px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+        .connect-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        /* Notifications */
+        .notification-permission {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .notify-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: var(--light-text-secondary);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            margin-top: 20px;
+        }
+        body.dark footer {
+            border-top-color: rgba(255,255,255,0.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-header">
+        <div class="logo">
+            <img src="https://res.cloudinary.com/dxiefklmt/image/upload/q_auto,f_auto/v1774102552/Dominion_Outreach_ft0cc0.png" alt="Dominion Outreach">
+            <h1>Dominion Outreach</h1>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon" style="display: none;"></i>
+        </button>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="home">Home</button>
+        <button class="tab-btn" data-tab="daily">Daily</button>
+        <button class="tab-btn" data-tab="prayer">Prayer Wall</button>
+        <button class="tab-btn" data-tab="connect">Connect</button>
+    </div>
+
+    <!-- Home Panel -->
+    <div class="panel active" id="home-panel">
+        <div class="card">
+            <h2>Welcome to Dominion Outreach</h2>
+            <p>Raising a Generation of Intimacy with the Father.</p>
+            <p style="margin-top: 12px;">"And this is life eternal, that they might know thee the only true God, and Jesus Christ, whom thou hast sent." — John 17:3</p>
+        </div>
+        <div class="card">
+            <h3>Today's Verse</h3>
+            <p style="font-style: italic; margin-top: 8px;">"Draw near to God, and he will draw near to you." — James 4:8</p>
+        </div>
+    </div>
+
+    <!-- Daily Devotional Panel -->
+    <div class="panel" id="daily-panel">
+        <div class="card" id="devotional-container">
+            <!-- Loaded via JS -->
+            <div class="devotional-title">Loading...</div>
+        </div>
+    </div>
+
+    <!-- Prayer Wall Panel -->
+    <div class="panel" id="prayer-panel">
+        <div class="card">
+            <h3>Prayer Requests</h3>
+            <div id="prayer-list"></div>
+            <form id="prayer-form">
+                <input type="text" id="prayer-name" placeholder="Your name (optional)" autocomplete="off">
+                <textarea id="prayer-request" rows="3" placeholder="Share your prayer request..."></textarea>
+                <button type="submit" class="submit">Submit Prayer Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Connect Panel -->
+    <div class="panel" id="connect-panel">
+        <div class="card">
+            <h3>Join Our Community</h3>
+            <div class="connect-buttons">
+                <a href="https://whatsapp.com/channel/0029Vb7dH5k0wajp7QiO6A2m" target="_blank" class="connect-btn">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="https://www.instagram.com/dominion_outreach/?hl=en" target="_blank" class="connect-btn">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="mailto:dominionoutreachofficial@gmail.com" class="connect-btn">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+            </div>
+            <div class="notification-permission">
+                <p>Get daily devotionals via notifications</p>
+                <button id="request-notify" class="notify-btn">Enable Notifications</button>
+            </div>
+            <p style="margin-top: 20px; text-align: center;">We'd love to hear from you! Reach out anytime.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Dominion Outreach. All rights reserved.</p>
+        <p>Made with <i class="fas fa-heart"></i> for His glory</p>
+    </footer>
+
+    <script>
+        // ---------- Theme ----------
+        const themeToggle = document.getElementById('themeToggle');
+        const sunIcon = themeToggle.querySelector('.fa-sun');
+        const moonIcon = themeToggle.querySelector('.fa-moon');
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                document.body.classList.add('dark');
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'inline-block';
+            } else {
+                document.body.classList.remove('dark');
+                sunIcon.style.display = 'inline-block';
+                moonIcon.style.display = 'none';
+            }
+            localStorage.setItem('theme', theme);
+        }
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') setTheme('dark');
+        else setTheme('light');
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.body.classList.contains('dark');
+            setTheme(isDark ? 'light' : 'dark');
+        });
+
+        // ---------- Tab Navigation ----------
+        const tabs = document.querySelectorAll('.tab-btn');
+        const panels = document.querySelectorAll('.panel');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.getAttribute('data-tab');
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                panels.forEach(panel => panel.classList.remove('active'));
+                document.getElementById(`${target}-panel`).classList.add('active');
+            });
+        });
+
+        // ---------- Daily Devotionals (sample – you can replace with your own) ----------
+        const devotionals = [
+            { title: "Walking in Intimacy", date: "March 31, 2026", content: "Intimacy with God is not a destination; it’s a journey of daily surrender. When we draw near, He draws near. Today, spend time in His presence and let His love transform you." },
+            { title: "The Power of Partnership", date: "March 30, 2026", content: "You were never meant to walk alone. God places us in community to encourage, uplift, and sharpen one another. Reach out to a brother or sister today." },
+            { title: "Living as a New Creation", date: "March 29, 2026", content: "In Christ, old things have passed away. Embrace your identity as a child of God and walk in the freedom He has given you." }
+        ];
+        function loadDevotional() {
+            const today = new Date().toISOString().slice(0,10);
+            // For demo, just show the first one; you can rotate based on date.
+            const dev = devotionals[0];
+            document.getElementById('devotional-container').innerHTML = `
+                <div class="devotional-title">${dev.title}</div>
+                <div class="devotional-date">${dev.date}</div>
+                <div class="devotional-content">${dev.content}</div>
+            `;
+        }
+        loadDevotional();
+
+        // ---------- Prayer Wall (localStorage) ----------
+        let prayers = JSON.parse(localStorage.getItem('prayers') || '[]');
+        function renderPrayers() {
+            const container = document.getElementById('prayer-list');
+            if (!container) return;
+            if (prayers.length === 0) {
+                container.innerHTML = '<p>No prayer requests yet. Be the first to share.</p>';
+                return;
+            }
+            container.innerHTML = prayers.map((p, idx) => `
+                <div class="prayer-item">
+                    <div class="prayer-name">${escapeHtml(p.name) || 'Anonymous'}</div>
+                    <div class="prayer-text">${escapeHtml(p.text)}</div>
+                    <div class="prayer-meta">
+                        <span>${p.date}</span>
+                        <button class="pray-button" data-idx="${idx}">Prayed (${p.prayCount || 0})</button>
+                    </div>
+                </div>
+            `).join('');
+            // Attach pray button events
+            document.querySelectorAll('.pray-button').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idx = parseInt(btn.dataset.idx);
+                    prayers[idx].prayCount = (prayers[idx].prayCount || 0) + 1;
+                    localStorage.setItem('prayers', JSON.stringify(prayers));
+                    renderPrayers();
+                });
+            });
+        }
+        function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+        document.getElementById('prayer-form')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('prayer-name').value.trim();
+            const text = document.getElementById('prayer-request').value.trim();
+            if (!text) return;
+            prayers.unshift({
+                name: name || 'Anonymous',
+                text: text,
+                date: new Date().toLocaleDateString(),
+                prayCount: 0
+            });
+            localStorage.setItem('prayers', JSON.stringify(prayers));
+            document.getElementById('prayer-name').value = '';
+            document.getElementById('prayer-request').value = '';
+            renderPrayers();
+        });
+        renderPrayers();
+
+        // ---------- Notifications (browser) ----------
+        const notifyBtn = document.getElementById('request-notify');
+        async function requestNotificationPermission() {
+            if (!('Notification' in window)) {
+                alert('This browser does not support notifications');
+                return;
+            }
+            const permission = await Notification.requestPermission();
+            if (permission === 'granted') {
+                // Send a test notification
+                new Notification('Dominion Outreach', {
+                    body: 'You will now receive daily devotionals and prayer updates!',
+                    icon: 'https://res.cloudinary.com/dxiefklmt/image/upload/q_auto,f_auto/v1774102552/Dominion_Outreach_ft0cc0.png'
+                });
+                // Optionally schedule a daily reminder (simulated)
+                setInterval(() => {
+                    // In real app, you'd check for new content; here just a demo
+                    if (Notification.permission === 'granted') {
+                        new Notification('Daily Devotional', {
+                            body: 'New devotion available: "Walking in Intimacy"',
+                            icon: 'https://res.cloudinary.com/dxiefklmt/image/upload/q_auto,f_auto/v1774102552/Dominion_Outreach_ft0cc0.png'
+                        });
+                    }
+                }, 24 * 60 * 60 * 1000); // once a day (simulated)
+                alert('Notifications enabled! You will receive daily updates.');
+            } else {
+                alert('Please allow notifications to receive updates.');
+            }
+        }
+        notifyBtn?.addEventListener('click', requestNotificationPermission);
+
+        // ---------- Service Worker (for PWA offline & install) ----------
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').then(reg => {
+                console.log('Service Worker registered', reg);
+            }).catch(err => console.log('SW registration failed', err));
+        }
+    </script>
+
+    <script>
+        // The service worker code will be in a separate file (sw.js)
+        // For this demo, we embed it dynamically
+        if (!document.querySelector('#sw-script')) {
+            const swCode = `
+self.addEventListener('install', event => {
+    event.waitUntil(
+        caches.open('dominion-cache-v1').then(cache => {
+            return cache.addAll([
+                '/',
+                '/index.html',
+                'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
+                'https://res.cloudinary.com/dxiefklmt/image/upload/q_auto,f_auto/v1774102552/Dominion_Outreach_ft0cc0.png'
+            ]);
+        })
+    );
+});
+self.addEventListener('fetch', event => {
+    event.respondWith(
+        caches.match(event.request).then(response => {
+            return response || fetch(event.request);
+        })
+    );
+});
+`;
+            const blob = new Blob([swCode], {type: 'application/javascript'});
+            const url = URL.createObjectURL(blob);
+            navigator.serviceWorker.register(url).then(reg => {
+                console.log('Embedded SW registered');
+            });
+        }
+    </script>
+</body>
+</html>
