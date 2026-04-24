@@ -4,16 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#000000">
-    <title>Dominion Outreach – Intimacy with the Father</title>
+    <title>Dominion Outreach – The Ultimate App</title>
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="https://res.cloudinary.com/dxiefklmt/image/upload/q_auto,f_auto/v1774102552/Dominion_Outreach_ft0cc0.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --bg: #000000;
             --surface: #1C1C1E;
@@ -21,15 +17,12 @@
             --text: #FFFFFF;
             --text-secondary: #98989D;
             --primary: #7C4DFF;
-            --primary-dark: #4A1CB9;
             --secondary: #00C9A7;
             --accent: #FF6B6B;
             --border: rgba(255,255,255,0.08);
             --shadow: 0 8px 24px rgba(0,0,0,0.3);
-            --shadow-hover: 0 12px 32px rgba(0,0,0,0.4);
             --radius: 24px;
             --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
         body {
             font-family: var(--font);
@@ -50,17 +43,8 @@
             align-items: center;
             z-index: 100;
         }
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .logo-img {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            object-fit: cover;
-        }
+        .logo-area { display: flex; align-items: center; gap: 12px; }
+        .logo-img { width: 44px; height: 44px; border-radius: 12px; object-fit: cover; }
         .app-title {
             font-size: 1.3rem;
             font-weight: 700;
@@ -69,64 +53,56 @@
             background-clip: text;
             color: transparent;
         }
-        .logout-btn {
+        .menu-btn {
             background: none;
             border: none;
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .logout-btn:active { transform: scale(0.95); }
-        /* Login Screen */
-        .login-screen {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-            background: var(--bg);
-        }
-        .login-card {
-            background: var(--surface);
-            border-radius: 48px;
-            padding: 40px 24px;
-            max-width: 360px;
-            width: 100%;
-            text-align: center;
-            box-shadow: var(--shadow);
-        }
-        .login-buttons {
-            display: flex;
-            gap: 20px;
-            margin-top: 32px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .login-btn {
-            flex: 1;
-            background: var(--primary);
-            border: none;
-            border-radius: 60px;
-            padding: 14px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .login-btn:active { transform: scale(0.97); }
-        .login-btn.secondary { background: var(--secondary); }
-        .login-input {
-            width: 100%;
-            padding: 14px;
-            border-radius: 30px;
-            border: 1px solid var(--border);
-            background: var(--surface-light);
             color: var(--text);
-            margin-bottom: 16px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: 0.2s;
         }
-        .hidden { display: none; }
-        /* Tab Bar */
+        /* Sidebar Drawer */
+        .drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: var(--surface);
+            z-index: 200;
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 80px 20px 20px;
+            box-shadow: -5px 0 20px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .drawer.open { right: 0; }
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 199;
+            display: none;
+        }
+        .drawer-overlay.show { display: block; }
+        .drawer a, .drawer button {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.2rem;
+            text-align: left;
+            padding: 12px;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+        }
+        .drawer a:hover, .drawer button:hover { background: var(--surface-light); }
+        /* Bottom Tab Bar */
         .tab-bar {
             position: fixed;
             bottom: 0;
@@ -139,46 +115,33 @@
             justify-content: space-around;
             padding: 8px 0 20px;
             z-index: 100;
-            overflow-x: auto;
-            white-space: nowrap;
         }
         .tab-btn {
             background: none;
             border: none;
-            display: inline-flex;
+            display: flex;
             flex-direction: column;
             align-items: center;
             gap: 4px;
             font-size: 0.75rem;
             color: var(--text-secondary);
-            transition: var(--transition);
+            transition: 0.2s;
             cursor: pointer;
             padding: 6px 12px;
             border-radius: 30px;
         }
         .tab-btn i { font-size: 1.4rem; }
-        .tab-btn.active {
-            color: var(--primary);
-            background: rgba(124,77,255,0.1);
-        }
-        .main-content {
-            padding: 20px 16px 80px;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        /* Cards */
+        .tab-btn.active { color: var(--primary); background: rgba(124,77,255,0.1); }
+        .main-content { padding: 20px 16px 80px; max-width: 700px; margin: 0 auto; }
         .card {
             background: var(--surface);
             border-radius: var(--radius);
             padding: 20px;
             margin-bottom: 20px;
             box-shadow: var(--shadow);
-            transition: var(--transition);
+            transition: 0.2s;
         }
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
-        }
+        .card:hover { transform: translateY(-2px); }
         button {
             background: var(--primary);
             border: none;
@@ -187,9 +150,7 @@
             color: white;
             font-weight: 600;
             cursor: pointer;
-            transition: var(--transition);
         }
-        button:active { transform: scale(0.97); }
         input, textarea {
             width: 100%;
             padding: 12px;
@@ -209,49 +170,35 @@
             color: var(--text);
             padding: 12px 24px;
             border-radius: 60px;
-            z-index: 200;
+            z-index: 300;
             animation: fadeUp 0.3s ease;
-            box-shadow: var(--shadow);
         }
         @keyframes fadeUp {
             from { opacity: 0; transform: translateX(-50%) translateY(20px); }
             to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
-        .reply-box {
-            background: var(--surface-light);
-            padding: 12px;
-            border-radius: 16px;
-            margin-top: 8px;
-            font-size: 0.9rem;
-        }
-        .loader {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-secondary);
-        }
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .card { animation: fadeIn 0.4s ease; }
+        .hidden { display: none; }
+        .loader { text-align: center; padding: 40px; color: var(--text-secondary); }
+        .admin-table { width: 100%; border-collapse: collapse; }
+        .admin-table th, .admin-table td { padding: 8px; text-align: left; border-bottom: 1px solid var(--border); }
+        .admin-table th { color: var(--primary); }
     </style>
 </head>
 <body>
 
 <!-- Login Screen -->
-<div id="loginScreen" class="login-screen">
-    <div class="login-card">
+<div id="loginScreen" class="login-screen" style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px;">
+    <div class="login-card" style="background: var(--surface); border-radius: 48px; padding: 40px 24px; max-width: 360px; width: 100%; text-align: center;">
         <img src="https://res.cloudinary.com/dxiefklmt/image/upload/q_auto,f_auto/v1774102552/Dominion_Outreach_ft0cc0.png" width="80" style="border-radius: 20px; margin-bottom: 20px;">
         <h2>Dominion Outreach</h2>
         <p style="margin-bottom: 24px;">Raising a Generation of Intimacy</p>
-        <div class="login-buttons">
-            <button id="adminLoginBtn" class="login-btn">👑 Admin Login</button>
-            <button id="memberJoinBtn" class="login-btn secondary">🙏 Join as Disciple</button>
+        <div style="display: flex; gap: 20px; margin-top: 32px; justify-content: center;">
+            <button id="adminLoginBtn" style="flex:1; background: var(--primary); border: none; border-radius: 60px; padding: 14px; color: white; font-weight: 600;">👑 Admin Login</button>
+            <button id="memberJoinBtn" style="flex:1; background: var(--secondary); border: none; border-radius: 60px; padding: 14px; color: white; font-weight: 600;">🙏 Join as Disciple</button>
         </div>
         <div id="adminLoginForm" class="hidden" style="margin-top: 24px;">
-            <input type="email" id="adminEmail" placeholder="Email" class="login-input">
-            <input type="password" id="adminPassword" placeholder="Password" class="login-input">
+            <input type="email" id="adminEmail" placeholder="Email" style="width:100%; padding:14px; border-radius:30px; border:1px solid var(--border); background: var(--surface-light); color: var(--text); margin-bottom:16px;">
+            <input type="password" id="adminPassword" placeholder="Password" style="width:100%; padding:14px; border-radius:30px; border:1px solid var(--border); background: var(--surface-light); color: var(--text); margin-bottom:16px;">
             <button id="submitAdminLogin">Sign in</button>
             <div id="loginError" style="color: #FF6B6B; margin-top: 12px;"></div>
         </div>
@@ -265,52 +212,56 @@
             <img src="https://res.cloudinary.com/dxiefklmt/image/upload/q_auto,f_auto/v1774102552/Dominion_Outreach_ft0cc0.png" class="logo-img">
             <span class="app-title">Dominion Outreach</span>
         </div>
-        <button id="logoutBtn" class="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
+        <button id="menuBtn" class="menu-btn"><i class="fas fa-bars"></i></button>
     </div>
 
     <div class="main-content" id="mainContent"></div>
 
-    <div class="tab-bar" id="tabBar">
+    <div class="tab-bar">
         <button class="tab-btn active" data-tab="home"><i class="fas fa-home"></i><span>Home</span></button>
-        <button class="tab-btn" data-tab="feed"><i class="fas fa-newspaper"></i><span>Feed</span></button>
-        <button class="tab-btn" data-tab="prayer"><i class="fas fa-hands-praying"></i><span>Prayer</span></button>
         <button class="tab-btn" data-tab="journal"><i class="fas fa-book"></i><span>Journal</span></button>
-        <button class="tab-btn" data-tab="testimonies"><i class="fas fa-star"></i><span>Testimonies</span></button>
-        <button class="tab-btn" data-tab="challenges"><i class="fas fa-lock"></i><span>Challenges</span></button>
+        <button class="tab-btn" data-tab="feed"><i class="fas fa-newspaper"></i><span>Feed</span></button>
         <button class="tab-btn" data-tab="connect"><i class="fas fa-link"></i><span>Connect</span></button>
-        <button id="adminTabBtn" class="tab-btn" style="display: none;" data-tab="admin"><i class="fas fa-user-shield"></i><span>Admin</span></button>
+    </div>
+
+    <!-- Drawer (Hamburger Menu) -->
+    <div id="drawerOverlay" class="drawer-overlay"></div>
+    <div id="drawer" class="drawer">
+        <button id="drawerPrayer"><i class="fas fa-hands-praying"></i> Prayer</button>
+        <button id="drawerTestimonies"><i class="fas fa-star"></i> Testimonies</button>
+        <button id="drawerChallenges"><i class="fas fa-lock"></i> Challenges</button>
+        <button id="drawerNotifications"><i class="fas fa-bell"></i> Notifications</button>
+        <button id="drawerLogout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        <button id="drawerAdmin" style="display: none;"><i class="fas fa-user-shield"></i> Admin Dashboard</button>
     </div>
 </div>
 
-<!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
 <script>
     // ========== FIREBASE CONFIG (REPLACE WITH YOUR OWN) ==========
     const firebaseConfig = {
-        apiKey: "AIzaSyD-IECvQ8eJ2NVgvV8vO6KkpTDmyPHd2MQ" ,
-        authDomain: "dominion-outreach.firebaseapp.com",
-        projectId: "dominion-outreach",
-        storageBucket: "dominion-outreach.firebasestorage.app",
-         messagingSenderId: "378482519812",
-        appId: "1:378482519812:web:cb6200a73f8cefa7882a51",
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_AUTH_DOMAIN",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_STORAGE_BUCKET",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId: "YOUR_APP_ID"
     };
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    // Cloudinary (for admin posts)
     const CLOUD_NAME = "dxiefklmt";
     const UPLOAD_PRESET = "dominion_app";
 
-    // Global state
     let currentUser = null;
     let isAdmin = false;
-    let currentTab = 'home';
     let userDoc = null;
+    let currentTab = 'home';
+    let unsubscribe = {};
 
-    // Helper: show toast
     function showToast(msg) {
         let toast = document.querySelector('.toast');
         if (toast) toast.remove();
@@ -320,21 +271,10 @@
         document.body.appendChild(toast);
         setTimeout(() => toast.remove(), 3000);
     }
+    function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;'); }
 
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>]/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            return m;
-        });
-    }
-
-    // ========== AUTH ==========
-    document.getElementById('adminLoginBtn').onclick = () => {
-        document.getElementById('adminLoginForm').classList.toggle('hidden');
-    };
+    // ========== LOGIN LOGIC ==========
+    document.getElementById('adminLoginBtn').onclick = () => document.getElementById('adminLoginForm').classList.toggle('hidden');
     document.getElementById('memberJoinBtn').onclick = async () => {
         const name = prompt("Enter your name (e.g., Favour):");
         if (!name) return;
@@ -343,489 +283,294 @@
         const randomPassword = Math.random().toString(36).slice(-10);
         try {
             const cred = await auth.createUserWithEmailAndPassword(email, randomPassword);
-            await db.collection('users').doc(cred.user.uid).set({
-                name: name,
-                email: email,
-                role: 'member',
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
+            await db.collection('users').doc(cred.user.uid).set({ name, email, role: 'member', createdAt: firebase.firestore.FieldValue.serverTimestamp() });
             showToast(`✨ Beautifully decorated! ✨`);
             setTimeout(() => showToast(`Welcome, ${name}! 🎉`), 1500);
-        } catch (err) {
-            alert("Error: " + err.message);
-        }
+        } catch (err) { alert("Error: " + err.message); }
     };
     document.getElementById('submitAdminLogin').onclick = async () => {
         const email = document.getElementById('adminEmail').value;
         const pwd = document.getElementById('adminPassword').value;
-        try {
-            await auth.signInWithEmailAndPassword(email, pwd);
-        } catch (err) {
-            document.getElementById('loginError').innerText = err.message;
-        }
+        try { await auth.signInWithEmailAndPassword(email, pwd); } 
+        catch (err) { document.getElementById('loginError').innerText = err.message; }
     };
-    document.getElementById('logoutBtn').onclick = async () => await auth.signOut();
+    document.getElementById('drawerLogout').onclick = async () => await auth.signOut();
 
     auth.onAuthStateChanged(async (user) => {
         if (user) {
             currentUser = user;
             const doc = await db.collection('users').doc(user.uid).get();
-            userDoc = doc.data();
+            if (doc.exists) userDoc = doc.data();
+            else { userDoc = { name: user.email.split('@')[0], email: user.email }; }
             const adminEmails = ['favourbaraka1@gmail.com', 'barakafavor37@gmail.com'];
             isAdmin = adminEmails.includes(user.email);
             document.getElementById('loginScreen').style.display = 'none';
             document.getElementById('appContainer').classList.remove('hidden');
-            document.getElementById('adminTabBtn').style.display = isAdmin ? 'flex' : 'none';
-            // Personalized welcome
+            document.getElementById('drawerAdmin').style.display = isAdmin ? 'flex' : 'none';
+            // Show welcome
             const name = userDoc?.name || (isAdmin ? 'Admin' : 'Disciple');
             showToast(`✨ Beautifully decorated! ✨`);
             setTimeout(() => showToast(`Welcome, ${name}! 🎉`), 1500);
+            // Load default tab
             switchTab('home');
             startListeners();
         } else {
             document.getElementById('loginScreen').style.display = 'flex';
             document.getElementById('appContainer').classList.add('hidden');
-            if (window.postsUnsub) window.postsUnsub();
-            if (window.prayersUnsub) window.prayersUnsub();
-            if (window.challengesUnsub) window.challengesUnsub();
-            if (window.testimoniesUnsub) window.testimoniesUnsub();
+            Object.values(unsubscribe).forEach(fn => fn());
         }
     });
 
-    // Firestore listeners (optimized)
     function startListeners() {
-        if (window.postsUnsub) window.postsUnsub();
-        window.postsUnsub = db.collection('posts').orderBy('timestamp', 'desc').limit(30).onSnapshot(() => {
-            if (currentTab === 'feed') renderFeed();
-        });
-        if (window.prayersUnsub) window.prayersUnsub();
-        window.prayersUnsub = db.collection('prayers').orderBy('timestamp', 'desc').onSnapshot(() => {
-            if (currentTab === 'prayer') renderPrayerWall();
-        });
-        if (window.challengesUnsub) window.challengesUnsub();
+        if (unsubscribe.posts) unsubscribe.posts();
+        unsubscribe.posts = db.collection('posts').orderBy('timestamp', 'desc').limit(30).onSnapshot(() => { if (currentTab === 'feed') renderFeed(); });
+        if (unsubscribe.prayers) unsubscribe.prayers();
+        unsubscribe.prayers = db.collection('prayers').orderBy('timestamp', 'desc').onSnapshot(() => { if (currentTab === 'prayer') renderPrayer(); });
+        if (unsubscribe.testimonies) unsubscribe.testimonies();
+        unsubscribe.testimonies = db.collection('testimonies').orderBy('timestamp', 'desc').onSnapshot(() => { if (currentTab === 'testimonies') renderTestimonies(); });
+        if (unsubscribe.challenges) unsubscribe.challenges();
         let challengesQuery = db.collection('challenges');
-        if (!isAdmin && currentUser) challengesQuery = challengesQuery.where('userId', '==', currentUser.uid);
-        window.challengesUnsub = challengesQuery.orderBy('timestamp', 'desc').onSnapshot(() => {
-            if (currentTab === 'challenges') renderChallenges();
-        });
-        if (window.testimoniesUnsub) window.testimoniesUnsub();
-        window.testimoniesUnsub = db.collection('testimonies').orderBy('timestamp', 'desc').onSnapshot(() => {
-            if (currentTab === 'testimonies') renderTestimonies();
-        });
+        if (!isAdmin) challengesQuery = challengesQuery.where('userId', '==', currentUser.uid);
+        unsubscribe.challenges = challengesQuery.orderBy('timestamp', 'desc').onSnapshot(() => { if (currentTab === 'challenges') renderChallenges(); });
     }
 
-    // ========== RENDER FUNCTIONS (Optimized) ==========
+    // ========== RENDER FUNCTIONS ==========
     async function renderHome() {
         const verseDoc = await db.collection('settings').doc('dailyVerse').get();
         let verse = { ref: 'Psalm 118:24', text: 'This is the day the Lord has made; let us rejoice and be glad in it.' };
         if (verseDoc.exists) verse = verseDoc.data();
         const name = userDoc?.name || (isAdmin ? 'Admin' : 'Disciple');
         const html = `
-            <div class="card">
-                <h2>🙏 Hello, ${escapeHtml(name)}</h2>
-                <p>Welcome to your spiritual home. May you find peace, purpose, and intimacy with the Father.</p>
-            </div>
-            <div class="card">
-                <h3>📖 Daily Verse</h3>
-                <p style="font-style: italic; margin: 12px 0;">“${escapeHtml(verse.text)}”</p>
-                <p style="text-align: right;">— ${escapeHtml(verse.ref)}</p>
-            </div>
-            <div class="card">
-                <h3>🌟 Today's Encouragement</h3>
-                <p>You are not alone. God is with you, and this community is praying for you.</p>
-            </div>
-            <div class="card">
-                <h3>🎵 Worship Moment</h3>
-                <p><i class="fas fa-headphones"></i> “Way Maker” – Sinach</p>
-            </div>
-            <div class="card">
-                <h3>📲 Quick Connect</h3>
-                <div style="display: flex; gap: 20px; justify-content: center; margin-top: 12px;">
-                    <a href="https://whatsapp.com/channel/0029Vb7dH5k0wajp7QiO6A2m" target="_blank" style="color: var(--secondary);"><i class="fab fa-whatsapp fa-2x"></i></a>
-                    <a href="https://www.instagram.com/dominion_outreach/?hl=en" target="_blank" style="color: var(--primary);"><i class="fab fa-instagram fa-2x"></i></a>
-                    <a href="https://favour-37.github.io/Dominion-Outreach/" target="_blank" style="color: var(--text);"><i class="fas fa-globe fa-2x"></i></a>
-                    <a href="mailto:dominionoutreachofficial@gmail.com" style="color: var(--accent);"><i class="fas fa-envelope fa-2x"></i></a>
-                </div>
-            </div>
+            <div class="card"><h2>🙏 Hello, ${escapeHtml(name)}</h2><p>Welcome to your spiritual home. May you find peace, purpose, and intimacy with the Father.</p></div>
+            <div class="card"><h3>📖 Daily Verse</h3><p style="font-style:italic; margin:12px 0;">“${escapeHtml(verse.text)}”</p><p style="text-align:right;">— ${escapeHtml(verse.ref)}</p></div>
+            <div class="card"><h3>🌟 Today's Encouragement</h3><p>You are not alone. God is with you, and this community is praying for you.</p></div>
+            <div class="card"><h3>🎵 Worship Moment</h3><p><i class="fas fa-headphones"></i> “Way Maker” – Sinach</p></div>
         `;
         document.getElementById('mainContent').innerHTML = html;
     }
 
+    async function renderJournal() {
+        const snapshot = await db.collection('users').doc(currentUser.uid).collection('journal').orderBy('timestamp', 'desc').get();
+        let html = `<div class="card"><h3>📔 Personal Journal</h3><input id="journalTitle" placeholder="Title"><textarea id="journalContent" rows="4" placeholder="Write your thoughts..."></textarea><button id="addJournalEntry">Save Entry</button></div><div id="journalList"></div>`;
+        document.getElementById('mainContent').innerHTML = html;
+        const listDiv = document.getElementById('journalList');
+        if (snapshot.empty) listDiv.innerHTML = '<div class="card">No journal entries yet.</div>';
+        else {
+            let entries = '';
+            snapshot.forEach(doc => {
+                const e = doc.data();
+                entries += `<div class="card"><h3>${escapeHtml(e.title)}</h3><div style="font-size:0.75rem;">${new Date(e.timestamp?.toDate()).toLocaleString()}</div><p>${escapeHtml(e.content)}</p><button class="delete-journal" data-id="${doc.id}" style="background:none; color:var(--text-secondary);">Delete</button></div>`;
+            });
+            listDiv.innerHTML = entries;
+        }
+        document.getElementById('addJournalEntry')?.addEventListener('click', async () => {
+            const title = document.getElementById('journalTitle').value.trim();
+            const content = document.getElementById('journalContent').value.trim();
+            if (!title || !content) return alert('Fill both');
+            await db.collection('users').doc(currentUser.uid).collection('journal').add({ title, content, timestamp: firebase.firestore.FieldValue.serverTimestamp() });
+            renderJournal();
+            showToast('Journal saved.');
+        });
+        document.querySelectorAll('.delete-journal').forEach(btn => btn.onclick = async () => { await db.collection('users').doc(currentUser.uid).collection('journal').doc(btn.dataset.id).delete(); renderJournal(); });
+    }
+
     async function renderFeed() {
         const snapshot = await db.collection('posts').orderBy('timestamp', 'desc').limit(30).get();
-        if (snapshot.empty) {
-            document.getElementById('mainContent').innerHTML = '<div class="card">No posts yet. Admin will share soon.</div>';
-            return;
-        }
+        if (snapshot.empty) { document.getElementById('mainContent').innerHTML = '<div class="card">No posts yet.</div>'; return; }
         let html = '';
         snapshot.forEach(doc => {
             const p = doc.data();
-            const mediaHtml = p.mediaUrl ? (p.mediaType === 'image' ? `<div class="post-media"><img src="${p.mediaUrl}" loading="lazy"></div>` :
-                `<div class="post-media"><video controls src="${p.mediaUrl}"></video></div>`) : '';
-            html += `
-                <div class="card" data-id="${doc.id}">
-                    <h3>${escapeHtml(p.title)}</h3>
-                    <div style="font-size:0.75rem; color:var(--text-secondary);">${new Date(p.timestamp?.toDate()).toLocaleDateString()}</div>
-                    <div style="margin: 12px 0;">${escapeHtml(p.content)}</div>
-                    ${mediaHtml}
-                    <div class="post-stats">
-                        <button class="like-post" data-id="${doc.id}"><i class="far fa-heart"></i> ${p.likes || 0}</button>
-                        <button class="comment-toggle" data-id="${doc.id}"><i class="far fa-comment"></i> ${(p.comments || []).length}</button>
-                    </div>
-                    <div class="comment-section hidden" id="comments-${doc.id}">
-                        <div id="commentsList-${doc.id}">${(p.comments || []).map(c => `<div class="comment"><strong>${escapeHtml(c.name)}</strong>: ${escapeHtml(c.text)}</div>`).join('')}</div>
-                        <div class="comment-input">
-                            <input type="text" id="commentInput-${doc.id}" placeholder="Write a comment...">
-                            <button class="submit-comment" data-id="${doc.id}">Post</button>
-                        </div>
-                    </div>
-                </div>
-            `;
+            const mediaHtml = p.mediaUrl ? (p.mediaType === 'image' ? `<div><img src="${p.mediaUrl}" style="max-width:100%; border-radius:16px;"></div>` : `<div><video controls src="${p.mediaUrl}" style="max-width:100%; border-radius:16px;"></video></div>`) : '';
+            html += `<div class="card" data-id="${doc.id}"><h3>${escapeHtml(p.title)}</h3><div style="font-size:0.75rem;">${new Date(p.timestamp?.toDate()).toLocaleDateString()}</div><div>${escapeHtml(p.content)}</div>${mediaHtml}<div><button class="like-post" data-id="${doc.id}">❤️ ${p.likes || 0}</button> <button class="comment-toggle" data-id="${doc.id}">💬 ${(p.comments || []).length}</button></div><div class="comment-section hidden" id="comments-${doc.id}"><div>${(p.comments || []).map(c => `<div><strong>${escapeHtml(c.name)}</strong>: ${escapeHtml(c.text)}</div>`).join('')}</div><div><input id="commentInput-${doc.id}" placeholder="Write a comment..."><button class="submit-comment" data-id="${doc.id}">Post</button></div></div></div>`;
         });
         document.getElementById('mainContent').innerHTML = html;
         attachFeedEvents();
     }
     function attachFeedEvents() {
-        document.querySelectorAll('.like-post').forEach(btn => {
-            btn.onclick = async () => {
-                const id = btn.dataset.id;
-                await db.collection('posts').doc(id).update({ likes: firebase.firestore.FieldValue.increment(1) });
-            };
-        });
-        document.querySelectorAll('.comment-toggle').forEach(btn => {
-            btn.onclick = () => {
-                const id = btn.dataset.id;
-                document.getElementById(`comments-${id}`).classList.toggle('hidden');
-            };
-        });
-        document.querySelectorAll('.submit-comment').forEach(btn => {
-            btn.onclick = async () => {
-                const id = btn.dataset.id;
-                const input = document.getElementById(`commentInput-${id}`);
-                const text = input.value.trim();
-                if (!text) return;
-                const name = userDoc?.name || (isAdmin ? 'Admin' : 'Disciple');
-                await db.collection('posts').doc(id).update({
-                    comments: firebase.firestore.FieldValue.arrayUnion({ name, text, timestamp: new Date().toISOString() })
-                });
-                input.value = '';
-            };
+        document.querySelectorAll('.like-post').forEach(btn => btn.onclick = async () => { await db.collection('posts').doc(btn.dataset.id).update({ likes: firebase.firestore.FieldValue.increment(1) }); });
+        document.querySelectorAll('.comment-toggle').forEach(btn => btn.onclick = () => document.getElementById(`comments-${btn.dataset.id}`).classList.toggle('hidden'));
+        document.querySelectorAll('.submit-comment').forEach(btn => btn.onclick = async () => {
+            const id = btn.dataset.id;
+            const input = document.getElementById(`commentInput-${id}`);
+            const text = input.value.trim();
+            if (!text) return;
+            const name = userDoc?.name || (isAdmin ? 'Admin' : 'Disciple');
+            await db.collection('posts').doc(id).update({ comments: firebase.firestore.FieldValue.arrayUnion({ name, text, timestamp: new Date().toISOString() }) });
+            input.value = '';
         });
     }
 
-    async function renderPrayerWall() {
+    async function renderPrayer() {
         const snapshot = await db.collection('prayers').orderBy('timestamp', 'desc').get();
-        let html = `
-            <div class="card">
-                <h3>🕯️ Submit a Prayer Request</h3>
-                <input type="text" id="prayerName" placeholder="Your name" value="${escapeHtml(userDoc?.name || '')}">
-                <textarea id="prayerText" rows="3" placeholder="What can we pray about?"></textarea>
-                <button id="submitPrayer">Submit</button>
-            </div>
-            <div id="prayerList"></div>
-        `;
+        let html = `<div class="card"><h3>🕯️ Prayer Request</h3><input id="prayerName" placeholder="Your name" value="${escapeHtml(userDoc?.name || '')}"><textarea id="prayerText" rows="3"></textarea><button id="submitPrayer">Submit</button></div><div id="prayerList"></div>`;
         document.getElementById('mainContent').innerHTML = html;
         const listDiv = document.getElementById('prayerList');
-        if (snapshot.empty) {
-            listDiv.innerHTML = '<div class="card">Be the first to share a prayer request.</div>';
-        } else {
-            let prayersHtml = '';
-            snapshot.forEach(doc => {
-                const p = doc.data();
-                prayersHtml += `
-                    <div class="card">
-                        <div><strong>${escapeHtml(p.name) || 'Anonymous'}</strong></div>
-                        <p>${escapeHtml(p.text)}</p>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
-                            <span style="font-size:0.75rem;">${new Date(p.timestamp?.toDate()).toLocaleDateString()}</span>
-                            <button class="pray-for" data-id="${doc.id}">🙏 Prayed (${p.prayCount || 0})</button>
-                        </div>
-                    </div>
-                `;
-            });
-            listDiv.innerHTML = prayersHtml;
+        if (snapshot.empty) listDiv.innerHTML = '<div class="card">Be the first to share.</div>';
+        else {
+            let prayers = '';
+            snapshot.forEach(doc => { const p = doc.data(); prayers += `<div class="card"><strong>${escapeHtml(p.name)}</strong><p>${escapeHtml(p.text)}</p><div><button class="pray-for" data-id="${doc.id}">🙏 Prayed (${p.prayCount || 0})</button></div></div>`; });
+            listDiv.innerHTML = prayers;
         }
         document.getElementById('submitPrayer')?.addEventListener('click', async () => {
             const name = document.getElementById('prayerName').value.trim();
             const text = document.getElementById('prayerText').value.trim();
             if (!text) return;
-            await db.collection('prayers').add({
-                name: name || (userDoc?.name || 'Anonymous'),
-                text,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                prayCount: 0
-            });
+            await db.collection('prayers').add({ name: name || (userDoc?.name || 'Anonymous'), text, timestamp: firebase.firestore.FieldValue.serverTimestamp(), prayCount: 0 });
             document.getElementById('prayerText').value = '';
-            showToast('Prayer request submitted.');
+            showToast('Prayer submitted.');
         });
-        document.querySelectorAll('.pray-for').forEach(btn => {
-            btn.onclick = async () => {
-                await db.collection('prayers').doc(btn.dataset.id).update({ prayCount: firebase.firestore.FieldValue.increment(1) });
-            };
-        });
-    }
-
-    async function renderJournal() {
-        const snapshot = await db.collection('users').doc(currentUser.uid).collection('journal').orderBy('timestamp', 'desc').get();
-        let html = `
-            <div class="card">
-                <h3>📔 Personal Journal</h3>
-                <input type="text" id="journalTitle" placeholder="Title">
-                <textarea id="journalContent" rows="4" placeholder="Write your thoughts, prayers, reflections..."></textarea>
-                <button id="addJournalEntry">Save Entry</button>
-            </div>
-            <div id="journalList"></div>
-        `;
-        document.getElementById('mainContent').innerHTML = html;
-        const listDiv = document.getElementById('journalList');
-        if (snapshot.empty) {
-            listDiv.innerHTML = '<div class="card">No journal entries yet. Start writing!</div>';
-        } else {
-            let entriesHtml = '';
-            snapshot.forEach(doc => {
-                const entry = doc.data();
-                entriesHtml += `
-                    <div class="card">
-                        <h3>${escapeHtml(entry.title)}</h3>
-                        <div style="font-size:0.75rem;">${new Date(entry.timestamp?.toDate()).toLocaleString()}</div>
-                        <p>${escapeHtml(entry.content)}</p>
-                        <button class="delete-journal" data-id="${doc.id}" style="background: none; color: var(--text-secondary);">Delete</button>
-                    </div>
-                `;
-            });
-            listDiv.innerHTML = entriesHtml;
-        }
-        document.getElementById('addJournalEntry')?.addEventListener('click', async () => {
-            const title = document.getElementById('journalTitle').value.trim();
-            const content = document.getElementById('journalContent').value.trim();
-            if (!title || !content) return alert('Please fill both');
-            await db.collection('users').doc(currentUser.uid).collection('journal').add({
-                title, content, timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
-            renderJournal();
-            showToast('Journal entry saved.');
-        });
-        document.querySelectorAll('.delete-journal').forEach(btn => {
-            btn.onclick = async () => {
-                await db.collection('users').doc(currentUser.uid).collection('journal').doc(btn.dataset.id).delete();
-                renderJournal();
-            };
-        });
+        document.querySelectorAll('.pray-for').forEach(btn => btn.onclick = async () => { await db.collection('prayers').doc(btn.dataset.id).update({ prayCount: firebase.firestore.FieldValue.increment(1) }); });
     }
 
     async function renderTestimonies() {
         const snapshot = await db.collection('testimonies').orderBy('timestamp', 'desc').get();
-        let html = `
-            <div class="card">
-                <h3>🌟 Share Your Testimony</h3>
-                <textarea id="testimonyText" rows="3" placeholder="Write your testimony..."></textarea>
-                <button id="submitTestimony">Share</button>
-            </div>
-            <div id="testimoniesList"></div>
-        `;
+        let html = `<div class="card"><h3>🌟 Share Testimony</h3><textarea id="testimonyText" rows="3"></textarea><button id="submitTestimony">Share</button></div><div id="testimoniesList"></div>`;
         document.getElementById('mainContent').innerHTML = html;
         const listDiv = document.getElementById('testimoniesList');
-        if (snapshot.empty) {
-            listDiv.innerHTML = '<div class="card">No testimonies yet. Be the first to share God’s goodness!</div>';
-        } else {
-            let htmlList = '';
-            snapshot.forEach(doc => {
-                const t = doc.data();
-                htmlList += `
-                    <div class="card">
-                        <div><strong>${escapeHtml(t.name)}</strong> <span style="font-size:0.75rem;">${new Date(t.timestamp?.toDate()).toLocaleDateString()}</span></div>
-                        <p style="margin-top: 8px;">"${escapeHtml(t.text)}"</p>
-                        <button class="like-testimony" data-id="${doc.id}">❤️ ${t.likes || 0}</button>
-                    </div>
-                `;
-            });
-            listDiv.innerHTML = htmlList;
+        if (snapshot.empty) listDiv.innerHTML = '<div class="card">No testimonies yet.</div>';
+        else {
+            let list = '';
+            snapshot.forEach(doc => { const t = doc.data(); list += `<div class="card"><strong>${escapeHtml(t.name)}</strong> <span style="font-size:0.75rem;">${new Date(t.timestamp?.toDate()).toLocaleDateString()}</span><p>"${escapeHtml(t.text)}"</p><button class="like-testimony" data-id="${doc.id}">❤️ ${t.likes || 0}</button></div>`; });
+            listDiv.innerHTML = list;
         }
         document.getElementById('submitTestimony')?.addEventListener('click', async () => {
             const text = document.getElementById('testimonyText').value.trim();
             if (!text) return;
-            await db.collection('testimonies').add({
-                text,
-                name: userDoc?.name || (isAdmin ? 'Admin' : 'Disciple'),
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                likes: 0
-            });
+            await db.collection('testimonies').add({ text, name: userDoc?.name || (isAdmin ? 'Admin' : 'Disciple'), timestamp: firebase.firestore.FieldValue.serverTimestamp(), likes: 0 });
             document.getElementById('testimonyText').value = '';
-            showToast('Thank you for sharing!');
+            showToast('Testimony shared.');
         });
-        document.querySelectorAll('.like-testimony').forEach(btn => {
-            btn.onclick = async () => {
-                await db.collection('testimonies').doc(btn.dataset.id).update({ likes: firebase.firestore.FieldValue.increment(1) });
-            };
-        });
+        document.querySelectorAll('.like-testimony').forEach(btn => btn.onclick = async () => { await db.collection('testimonies').doc(btn.dataset.id).update({ likes: firebase.firestore.FieldValue.increment(1) }); });
     }
 
     async function renderChallenges() {
         let query = db.collection('challenges');
         if (!isAdmin) query = query.where('userId', '==', currentUser.uid);
         const snapshot = await query.orderBy('timestamp', 'desc').get();
-        let html = `
-            <div class="card">
-                <h3>🔒 Private Prayer / Challenge</h3>
-                <p>Share something only the admin can see. We will reply to you privately.</p>
-                <textarea id="challengeText" rows="3" placeholder="What’s on your heart?"></textarea>
-                <button id="submitChallenge">Submit (Private)</button>
-            </div>
-            <div id="challengesList"></div>
-        `;
+        let html = `<div class="card"><h3>🔒 Private Challenge</h3><textarea id="challengeText" rows="3"></textarea><button id="submitChallenge">Submit (Private)</button></div><div id="challengesList"></div>`;
         document.getElementById('mainContent').innerHTML = html;
         const listDiv = document.getElementById('challengesList');
-        if (snapshot.empty) {
-            listDiv.innerHTML = '<div class="card">No private entries yet. You can share anything here.</div>';
-        } else {
-            let challengesHtml = '';
+        if (snapshot.empty) listDiv.innerHTML = '<div class="card">No private entries.</div>';
+        else {
+            let challenges = '';
             snapshot.forEach(doc => {
                 const c = doc.data();
-                challengesHtml += `
-                    <div class="card">
-                        <div style="display: flex; justify-content: space-between;">
-                            <strong>${new Date(c.timestamp?.toDate()).toLocaleString()}</strong>
-                            ${isAdmin ? `<span>From: ${escapeHtml(c.userName)}</span>` : ''}
-                        </div>
-                        <p style="margin-top: 8px;">${escapeHtml(c.text)}</p>
-                        ${c.reply ? `<div class="reply-box"><strong>Admin reply:</strong> ${escapeHtml(c.reply)}</div>` : ''}
-                        ${isAdmin && !c.reply ? `
-                            <textarea id="reply-${doc.id}" placeholder="Write a reply..."></textarea>
-                            <button class="reply-challenge" data-id="${doc.id}">Send Reply</button>
-                        ` : ''}
-                    </div>
-                `;
+                challenges += `<div class="card"><div><strong>${new Date(c.timestamp?.toDate()).toLocaleString()}</strong> ${isAdmin ? `<span>From: ${escapeHtml(c.userName)}</span>` : ''}</div><p>${escapeHtml(c.text)}</p>${c.reply ? `<div style="background:var(--surface-light); padding:12px; border-radius:16px;"><strong>Admin reply:</strong> ${escapeHtml(c.reply)}</div>` : ''}${isAdmin && !c.reply ? `<textarea id="reply-${doc.id}" placeholder="Reply..."></textarea><button class="reply-challenge" data-id="${doc.id}">Send Reply</button>` : ''}</div>`;
             });
-            listDiv.innerHTML = challengesHtml;
+            listDiv.innerHTML = challenges;
         }
         document.getElementById('submitChallenge')?.addEventListener('click', async () => {
             const text = document.getElementById('challengeText').value.trim();
             if (!text) return;
-            await db.collection('challenges').add({
-                userId: currentUser.uid,
-                userName: userDoc?.name || (isAdmin ? 'Admin' : 'Disciple'),
-                text: text,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                reply: null
-            });
+            await db.collection('challenges').add({ userId: currentUser.uid, userName: userDoc?.name || (isAdmin ? 'Admin' : 'Disciple'), text, timestamp: firebase.firestore.FieldValue.serverTimestamp(), reply: null });
             document.getElementById('challengeText').value = '';
-            showToast('Your private message has been sent to the admin.');
+            showToast('Private message sent.');
         });
-        document.querySelectorAll('.reply-challenge').forEach(btn => {
-            btn.onclick = async () => {
-                const id = btn.dataset.id;
-                const replyText = document.getElementById(`reply-${id}`).value.trim();
-                if (!replyText) return;
-                await db.collection('challenges').doc(id).update({ reply: replyText });
-                showToast('Reply sent.');
-                renderChallenges();
-            };
+        document.querySelectorAll('.reply-challenge').forEach(btn => btn.onclick = async () => {
+            const id = btn.dataset.id;
+            const reply = document.getElementById(`reply-${id}`).value.trim();
+            if (!reply) return;
+            await db.collection('challenges').doc(id).update({ reply });
+            showToast('Reply sent.');
+            renderChallenges();
         });
     }
 
-    function renderConnect() {
-        const html = `
-            <div class="card">
-                <h3>📱 Connect With Us</h3>
-                <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 20px;">
-                    <a href="https://whatsapp.com/channel/0029Vb7dH5k0wajp7QiO6A2m" target="_blank" style="color: var(--secondary); text-decoration: none; font-size: 1.2rem;"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a>
-                    <a href="https://www.instagram.com/dominion_outreach/?hl=en" target="_blank" style="color: var(--primary); text-decoration: none; font-size: 1.2rem;"><i class="fab fa-instagram"></i> Instagram</a>
-                    <a href="https://favour-37.github.io/Dominion-Outreach/" target="_blank" style="color: var(--text); text-decoration: none; font-size: 1.2rem;"><i class="fas fa-globe"></i> Our Website</a>
-                    <a href="mailto:dominionoutreachofficial@gmail.com" style="color: var(--accent); text-decoration: none; font-size: 1.2rem;"><i class="fas fa-envelope"></i> Email Support</a>
-                </div>
-            </div>
-            <div class="card">
-                <h3>🙌 Get Involved</h3>
-                <p>Join our WhatsApp channel for daily prayers, follow us on Instagram for inspiration, and visit our website for more resources.</p>
-            </div>
-        `;
+    async function renderConnect() {
+        const html = `<div class="card"><h3>📱 Connect With Us</h3><div style="display:flex; flex-direction:column; gap:20px;"><a href="https://whatsapp.com/channel/0029Vb7dH5k0wajp7QiO6A2m" target="_blank" style="color:var(--secondary);"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a><a href="https://www.instagram.com/dominion_outreach/?hl=en" target="_blank" style="color:var(--primary);"><i class="fab fa-instagram"></i> Instagram</a><a href="https://favour-37.github.io/Dominion-Outreach/" target="_blank" style="color:var(--text);"><i class="fas fa-globe"></i> Our Website</a><a href="mailto:dominionoutreachofficial@gmail.com" style="color:var(--accent);"><i class="fas fa-envelope"></i> Email Support</a></div></div><div class="card"><h3>🙌 Get Involved</h3><p>Join our WhatsApp channel for daily prayers, follow us on Instagram, and visit our website.</p></div>`;
         document.getElementById('mainContent').innerHTML = html;
     }
 
-    async function renderAdmin() {
-        let html = `
-            <div class="card">
-                <h3>✍️ Post New Devotional</h3>
-                <input type="text" id="postTitle" placeholder="Title">
-                <textarea id="postContent" rows="4" placeholder="Scripture / Reflection"></textarea>
-                <input type="file" id="postMedia" accept="image/*,video/*">
-                <button id="publishPostBtn">Publish Post</button>
-                <div id="uploadStatus"></div>
-            </div>
-            <div id="adminPostsList"></div>
-        `;
-        document.getElementById('mainContent').innerHTML = html;
-        const postsSnapshot = await db.collection('posts').orderBy('timestamp', 'desc').get();
-        let postsHtml = '<h3>Manage Posts</h3>';
-        postsSnapshot.forEach(doc => {
-            const p = doc.data();
-            postsHtml += `
-                <div class="card">
-                    <strong>${escapeHtml(p.title)}</strong> – ${new Date(p.timestamp?.toDate()).toLocaleDateString()}
-                    <button class="delete-post" data-id="${doc.id}" style="background: #FF3B30; margin-top: 8px;">Delete Post</button>
-                </div>
-            `;
-        });
-        document.getElementById('adminPostsList').innerHTML = postsHtml;
+    async function renderAdminDashboard() {
+        // Fetch all users, prayers, testimonies, challenges, posts
+        const usersSnap = await db.collection('users').get();
+        const prayersSnap = await db.collection('prayers').get();
+        const testimoniesSnap = await db.collection('testimonies').get();
+        const challengesSnap = await db.collection('challenges').get();
+        const postsSnap = await db.collection('posts').get();
 
-        document.getElementById('publishPostBtn')?.addEventListener('click', async () => {
-            const title = document.getElementById('postTitle').value.trim();
-            const content = document.getElementById('postContent').value.trim();
-            if (!title || !content) return alert('Title and content required');
-            const file = document.getElementById('postMedia').files[0];
-            let mediaUrl = null, mediaType = null;
-            const statusDiv = document.getElementById('uploadStatus');
-            if (file) {
-                statusDiv.innerText = 'Uploading...';
-                const formData = new FormData();
-                formData.append('file', file);
-                formData.append('upload_preset', UPLOAD_PRESET);
-                try {
-                    const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`, { method: 'POST', body: formData });
-                    const data = await res.json();
-                    mediaUrl = data.secure_url;
-                    mediaType = file.type.startsWith('image/') ? 'image' : 'video';
-                } catch (err) {}
-            }
-            await db.collection('posts').add({
-                title, content, mediaUrl, mediaType,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                likes: 0,
-                comments: []
-            });
-            alert('Post published!');
-            renderAdmin();
-        });
-        document.querySelectorAll('.delete-post').forEach(btn => {
-            btn.onclick = async () => {
-                if (confirm('Delete this post?')) await db.collection('posts').doc(btn.dataset.id).delete();
-                renderAdmin();
-            };
+        let html = `<h2>Admin Dashboard</h2>`;
+        // Users list
+        html += `<div class="card"><h3>👥 Users (${usersSnap.size})</h3><table class="admin-table"><tr><th>Name</th><th>Email</th><th>Joined</th></tr>`;
+        usersSnap.forEach(doc => { const u = doc.data(); html += `<tr><td>${escapeHtml(u.name)}</td><td>${escapeHtml(u.email)}</td><td>${u.createdAt?.toDate().toLocaleDateString() || '?'}</td></tr>`; });
+        html += `</table></div>`;
+
+        // Prayers management
+        html += `<div class="card"><h3>🕯️ Prayer Requests</h3>`;
+        if (prayersSnap.empty) html += `<p>None yet.</p>`;
+        else prayersSnap.forEach(doc => { const p = doc.data(); html += `<div><strong>${escapeHtml(p.name)}</strong>: ${escapeHtml(p.text)} <button class="delete-prayer" data-id="${doc.id}" style="background:#FF3B30; padding:4px 12px; margin-left:10px;">Delete</button></div>`; });
+        html += `</div>`;
+
+        // Testimonies management
+        html += `<div class="card"><h3>🌟 Testimonies</h3>`;
+        if (testimoniesSnap.empty) html += `<p>None yet.</p>`;
+        else testimoniesSnap.forEach(doc => { const t = doc.data(); html += `<div><strong>${escapeHtml(t.name)}</strong>: "${escapeHtml(t.text)}" <button class="delete-testimony" data-id="${doc.id}" style="background:#FF3B30; padding:4px 12px;">Delete</button></div>`; });
+        html += `</div>`;
+
+        // Challenges (all)
+        html += `<div class="card"><h3>🔒 Private Challenges</h3>`;
+        if (challengesSnap.empty) html += `<p>None.</p>`;
+        else challengesSnap.forEach(doc => { const c = doc.data(); html += `<div><strong>${escapeHtml(c.userName)}</strong>: ${escapeHtml(c.text)} ${c.reply ? `<br><i>Reply: ${escapeHtml(c.reply)}</i>` : ''}<textarea id="adminReply-${doc.id}" placeholder="Reply..."></textarea><button class="admin-reply" data-id="${doc.id}">Send Reply</button></div><hr>`; });
+        html += `</div>`;
+
+        // Posts management
+        html += `<div class="card"><h3>📝 Feed Posts</h3>`;
+        if (postsSnap.empty) html += `<p>No posts.</p>`;
+        else postsSnap.forEach(doc => { const p = doc.data(); html += `<div><strong>${escapeHtml(p.title)}</strong> - ${escapeHtml(p.content)} <button class="delete-post" data-id="${doc.id}" style="background:#FF3B30;">Delete Post</button></div>`; });
+        html += `</div>`;
+
+        document.getElementById('mainContent').innerHTML = html;
+
+        // Attach delete & reply listeners
+        document.querySelectorAll('.delete-prayer').forEach(btn => btn.onclick = async () => { await db.collection('prayers').doc(btn.dataset.id).delete(); renderAdminDashboard(); });
+        document.querySelectorAll('.delete-testimony').forEach(btn => btn.onclick = async () => { await db.collection('testimonies').doc(btn.dataset.id).delete(); renderAdminDashboard(); });
+        document.querySelectorAll('.delete-post').forEach(btn => btn.onclick = async () => { await db.collection('posts').doc(btn.dataset.id).delete(); renderAdminDashboard(); });
+        document.querySelectorAll('.admin-reply').forEach(btn => btn.onclick = async () => {
+            const id = btn.dataset.id;
+            const reply = document.getElementById(`adminReply-${id}`).value.trim();
+            if (!reply) return;
+            await db.collection('challenges').doc(id).update({ reply });
+            showToast('Reply sent.');
+            renderAdminDashboard();
         });
     }
 
-    function switchTab(tab) {
+    // Tab and drawer switching
+    async function switchTab(tab) {
         currentTab = tab;
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelector(`.tab-btn[data-tab="${tab}"]`)?.classList.add('active');
-        if (tab === 'home') renderHome();
-        else if (tab === 'feed') renderFeed();
-        else if (tab === 'prayer') renderPrayerWall();
-        else if (tab === 'journal') renderJournal();
-        else if (tab === 'testimonies') renderTestimonies();
-        else if (tab === 'challenges') renderChallenges();
-        else if (tab === 'connect') renderConnect();
-        else if (tab === 'admin' && isAdmin) renderAdmin();
+        if (tab === 'home') await renderHome();
+        else if (tab === 'journal') await renderJournal();
+        else if (tab === 'feed') await renderFeed();
+        else if (tab === 'connect') await renderConnect();
+        else if (tab === 'prayer') await renderPrayer();
+        else if (tab === 'testimonies') await renderTestimonies();
+        else if (tab === 'challenges') await renderChallenges();
+        else if (tab === 'admin') await renderAdminDashboard();
+        closeDrawer();
     }
 
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.addEventListener('click', () => switchTab(btn.dataset.tab));
-    });
+    // Drawer controls
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('drawerOverlay');
+    function openDrawer() { drawer.classList.add('open'); overlay.classList.add('show'); }
+    function closeDrawer() { drawer.classList.remove('open'); overlay.classList.remove('show'); }
+    document.getElementById('menuBtn').onclick = openDrawer;
+    overlay.onclick = closeDrawer;
 
-    // Service Worker for PWA (fast offline)
+    document.getElementById('drawerPrayer').onclick = () => switchTab('prayer');
+    document.getElementById('drawerTestimonies').onclick = () => switchTab('testimonies');
+    document.getElementById('drawerChallenges').onclick = () => switchTab('challenges');
+    document.getElementById('drawerNotifications').onclick = () => showToast('Notifications coming soon!');
+    document.getElementById('drawerAdmin').onclick = () => switchTab('admin');
+
+    // Manual tab clicks
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
+
+    // Service Worker for PWA
     if ('serviceWorker' in navigator) {
-        const swCode = `self.addEventListener('install', e => e.waitUntil(caches.open('do-v2').then(c => c.addAll(['/','/index.html']))));
-self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));`;
+        const swCode = `self.addEventListener('install', e => e.waitUntil(caches.open('do-v2').then(c => c.addAll(['/','/index.html'])))); self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));`;
         const blob = new Blob([swCode], {type: 'application/javascript'});
         const url = URL.createObjectURL(blob);
         navigator.serviceWorker.register(url);
