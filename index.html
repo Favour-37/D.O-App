@@ -4,55 +4,237 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#000000">
-    <title>Dominion Outreach – Ultimate App</title>
+    <title>Dominion Outreach – Intimacy with the Father</title>
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="https://res.cloudinary.com/dxiefklmt/image/upload/q_auto,f_auto/v1774102552/Dominion_Outreach_ft0cc0.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         :root {
-            --bg: #000000; --surface: #1C1C1E; --surface-light: #2C2C2E;
-            --text: #FFFFFF; --text-secondary: #98989D;
-            --primary: #7C4DFF; --secondary: #00C9A7; --accent: #FF6B6B;
-            --border: rgba(255,255,255,0.08); --shadow: 0 8px 24px rgba(0,0,0,0.3);
-            --radius: 24px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --bg: #000000;
+            --surface: #1C1C1E;
+            --surface-light: #2C2C2E;
+            --text: #FFFFFF;
+            --text-secondary: #98989D;
+            --primary: #7C4DFF;
+            --primary-dark: #4A1CB9;
+            --secondary: #00C9A7;
+            --accent: #FF6B6B;
+            --border: rgba(255,255,255,0.08);
+            --shadow: 0 8px 24px rgba(0,0,0,0.3);
+            --shadow-hover: 0 12px 32px rgba(0,0,0,0.4);
+            --radius: 24px;
+            --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        body { font-family: var(--font); background: var(--bg); color: var(--text); overflow-x: hidden; }
-        .app-header { position: sticky; top: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; z-index: 100; }
-        .logo-area { display: flex; align-items: center; gap: 12px; }
-        .logo-img { width: 44px; height: 44px; border-radius: 12px; object-fit: cover; }
-        .app-title { font-size: 1.3rem; font-weight: 700; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .menu-btn { background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; }
-        .hamburger-overlay { position: fixed; top: 0; left: -100%; width: 80%; max-width: 320px; height: 100vh; background: var(--surface); z-index: 200; transition: left 0.3s ease; padding: 20px; display: flex; flex-direction: column; gap: 20px; }
-        .hamburger-overlay.open { left: 0; }
-        .hamburger-header { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
-        .close-menu { background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; }
-        .hamburger-item { display: flex; align-items: center; gap: 15px; padding: 12px; border-radius: 16px; cursor: pointer; transition: var(--transition); color: var(--text); }
-        .hamburger-item:hover { background: var(--surface-light); }
-        .hamburger-item i { width: 24px; color: var(--primary); }
-        .overlay-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 199; display: none; }
-        .overlay-backdrop.active { display: block; }
-        .login-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; background: var(--bg); }
-        .login-card { background: var(--surface); border-radius: 48px; padding: 40px 24px; max-width: 380px; width: 100%; text-align: center; box-shadow: var(--shadow); }
-        .login-buttons { display: flex; gap: 20px; margin-top: 32px; justify-content: center; flex-wrap: wrap; }
-        .login-btn { flex: 1; background: var(--primary); border: none; border-radius: 60px; padding: 14px; color: white; font-weight: 600; cursor: pointer; }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+        /* Header */
+        .app-header {
+            position: sticky;
+            top: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-img {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+        .app-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .logout-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .logout-btn:active { transform: scale(0.95); }
+        /* Login Screen */
+        .login-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            background: var(--bg);
+        }
+        .login-card {
+            background: var(--surface);
+            border-radius: 48px;
+            padding: 40px 24px;
+            max-width: 360px;
+            width: 100%;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        .login-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .login-btn {
+            flex: 1;
+            background: var(--primary);
+            border: none;
+            border-radius: 60px;
+            padding: 14px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .login-btn:active { transform: scale(0.97); }
         .login-btn.secondary { background: var(--secondary); }
-        .login-input { width: 100%; padding: 14px; border-radius: 30px; border: 1px solid var(--border); background: var(--surface-light); color: var(--text); margin-bottom: 16px; }
+        .login-input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            background: var(--surface-light);
+            color: var(--text);
+            margin-bottom: 16px;
+        }
         .hidden { display: none; }
-        .tab-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); backdrop-filter: blur(20px); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 8px 0 20px; z-index: 100; }
-        .tab-btn { background: none; border: none; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.75rem; color: var(--text-secondary); transition: var(--transition); cursor: pointer; padding: 6px 12px; border-radius: 30px; }
+        /* Tab Bar */
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0 20px;
+            z-index: 100;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 30px;
+        }
         .tab-btn i { font-size: 1.4rem; }
-        .tab-btn.active { color: var(--primary); background: rgba(124,77,255,0.1); }
-        .main-content { padding: 20px 16px 80px; max-width: 700px; margin: 0 auto; }
-        .card { background: var(--surface); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; box-shadow: var(--shadow); transition: var(--transition); }
-        button { background: var(--primary); border: none; border-radius: 40px; padding: 10px 20px; color: white; font-weight: 600; cursor: pointer; }
+        .tab-btn.active {
+            color: var(--primary);
+            background: rgba(124,77,255,0.1);
+        }
+        .main-content {
+            padding: 20px 16px 80px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        /* Cards */
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        button {
+            background: var(--primary);
+            border: none;
+            border-radius: 40px;
+            padding: 10px 20px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
         button:active { transform: scale(0.97); }
-        input, textarea { width: 100%; padding: 12px; border-radius: 16px; border: 1px solid var(--border); background: var(--surface-light); color: var(--text); font-family: inherit; margin-bottom: 12px; }
-        .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: var(--surface-light); color: var(--text); padding: 12px 24px; border-radius: 60px; z-index: 200; animation: fadeUp 0.3s ease; }
-        @keyframes fadeUp { from { opacity: 0; transform: translateX(-50%) translateY(20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
-        .reply-box { background: var(--surface-light); padding: 12px; border-radius: 16px; margin-top: 8px; font-size: 0.9rem; }
-        .admin-user-card { border-left: 3px solid var(--primary); margin-bottom: 20px; }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: var(--surface-light);
+            color: var(--text);
+            font-family: inherit;
+            margin-bottom: 12px;
+        }
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--surface-light);
+            color: var(--text);
+            padding: 12px 24px;
+            border-radius: 60px;
+            z-index: 200;
+            animation: fadeUp 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+        .reply-box {
+            background: var(--surface-light);
+            padding: 12px;
+            border-radius: 16px;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+        .loader {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+        }
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card { animation: fadeIn 0.4s ease; }
     </style>
 </head>
 <body>
@@ -65,19 +247,13 @@
         <p style="margin-bottom: 24px;">Raising a Generation of Intimacy</p>
         <div class="login-buttons">
             <button id="adminLoginBtn" class="login-btn">👑 Admin Login</button>
-            <button id="memberMagicBtn" class="login-btn secondary">✉️ Member Magic Link</button>
+            <button id="memberJoinBtn" class="login-btn secondary">🙏 Join as Disciple</button>
         </div>
         <div id="adminLoginForm" class="hidden" style="margin-top: 24px;">
             <input type="email" id="adminEmail" placeholder="Email" class="login-input">
             <input type="password" id="adminPassword" placeholder="Password" class="login-input">
             <button id="submitAdminLogin">Sign in</button>
             <div id="loginError" style="color: #FF6B6B; margin-top: 12px;"></div>
-        </div>
-        <div id="memberMagicForm" class="hidden" style="margin-top: 24px;">
-            <input type="text" id="memberName" placeholder="Your full name" class="login-input">
-            <input type="email" id="memberEmail" placeholder="Your email address" class="login-input">
-            <button id="sendMagicLink">Send Magic Link</button>
-            <p style="font-size: 0.8rem; margin-top: 12px;">We'll email you a secure link. No password needed.</p>
         </div>
     </div>
 </div>
@@ -86,31 +262,24 @@
 <div id="appContainer" class="hidden">
     <div class="app-header">
         <div class="logo-area">
-            <button id="menuBtn" class="menu-btn"><i class="fas fa-bars"></i></button>
             <img src="https://res.cloudinary.com/dxiefklmt/image/upload/q_auto,f_auto/v1774102552/Dominion_Outreach_ft0cc0.png" class="logo-img">
             <span class="app-title">Dominion Outreach</span>
         </div>
-        <button id="logoutBtn" style="background: none; color: var(--text-secondary); border: none; font-size: 1.2rem;"><i class="fas fa-sign-out-alt"></i></button>
-    </div>
-    <div class="main-content" id="mainContent"></div>
-    <div class="tab-bar" id="tabBar">
-        <button class="tab-btn active" data-tab="home"><i class="fas fa-home"></i><span>Home</span></button>
-        <button class="tab-btn" data-tab="journal"><i class="fas fa-book"></i><span>Journal</span></button>
-        <button class="tab-btn" data-tab="feed"><i class="fas fa-newspaper"></i><span>Feed</span></button>
-        <button class="tab-btn" data-tab="connect"><i class="fas fa-link"></i><span>Connect</span></button>
+        <button id="logoutBtn" class="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
     </div>
 
-    <div id="hamburgerOverlay" class="hamburger-overlay">
-        <div class="hamburger-header"><h3>Menu</h3><button id="closeMenuBtn" class="close-menu"><i class="fas fa-times"></i></button></div>
-        <div id="hamburgerItems">
-            <div class="hamburger-item" data-tab="prayer"><i class="fas fa-hands-praying"></i> Prayer Wall</div>
-            <div class="hamburger-item" data-tab="testimonies"><i class="fas fa-star"></i> Testimonies</div>
-            <div class="hamburger-item" data-tab="challenges"><i class="fas fa-lock"></i> Private Challenges</div>
-            <div class="hamburger-item" id="adminMenuItem" style="display: none;" data-tab="admin"><i class="fas fa-user-shield"></i> Admin Panel</div>
-            <div class="hamburger-item" id="notificationsItem"><i class="fas fa-bell"></i> Notifications</div>
-        </div>
+    <div class="main-content" id="mainContent"></div>
+
+    <div class="tab-bar" id="tabBar">
+        <button class="tab-btn active" data-tab="home"><i class="fas fa-home"></i><span>Home</span></button>
+        <button class="tab-btn" data-tab="feed"><i class="fas fa-newspaper"></i><span>Feed</span></button>
+        <button class="tab-btn" data-tab="prayer"><i class="fas fa-hands-praying"></i><span>Prayer</span></button>
+        <button class="tab-btn" data-tab="journal"><i class="fas fa-book"></i><span>Journal</span></button>
+        <button class="tab-btn" data-tab="testimonies"><i class="fas fa-star"></i><span>Testimonies</span></button>
+        <button class="tab-btn" data-tab="challenges"><i class="fas fa-lock"></i><span>Challenges</span></button>
+        <button class="tab-btn" data-tab="connect"><i class="fas fa-link"></i><span>Connect</span></button>
+        <button id="adminTabBtn" class="tab-btn" style="display: none;" data-tab="admin"><i class="fas fa-user-shield"></i><span>Admin</span></button>
     </div>
-    <div id="overlayBackdrop" class="overlay-backdrop"></div>
 </div>
 
 <!-- Firebase SDKs -->
@@ -120,93 +289,82 @@
 <script>
     // ========== FIREBASE CONFIG (REPLACE WITH YOUR OWN) ==========
     const firebaseConfig = {
-  apiKey: "AIzaSyD-IECvQ8eJ2NVgvV8vO6KkpTDmyPHd2MQ",
-  authDomain: "dominion-outreach.firebaseapp.com",
-  projectId: "dominion-outreach",
-  storageBucket: "dominion-outreach.firebasestorage.app",
-  messagingSenderId: "378482519812",
-  appId: "1:378482519812:web:cb6200a73f8cefa7882a51",
-  measurementId: "G-V8N77QSRYG"
-};
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_AUTH_DOMAIN",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_STORAGE_BUCKET",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId: "YOUR_APP_ID"
+    };
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
+
+    // Cloudinary (for admin posts)
     const CLOUD_NAME = "dxiefklmt";
     const UPLOAD_PRESET = "dominion_app";
 
-    let currentUser = null, isAdmin = false, currentTab = 'home', userDoc = null;
-    let unsubscribers = {};
+    // Global state
+    let currentUser = null;
+    let isAdmin = false;
+    let currentTab = 'home';
+    let userDoc = null;
 
-    function showToast(msg) { let t = document.querySelector('.toast'); if(t) t.remove(); t = document.createElement('div'); t.className = 'toast'; t.innerText = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 3000); }
-    function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'})[m]); }
+    // Helper: show toast
+    function showToast(msg) {
+        let toast = document.querySelector('.toast');
+        if (toast) toast.remove();
+        toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerText = msg;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
 
-    // Hamburger
-    function closeMenu() { document.getElementById('hamburgerOverlay').classList.remove('open'); document.getElementById('overlayBackdrop').classList.remove('active'); }
-    function openMenu() { document.getElementById('hamburgerOverlay').classList.add('open'); document.getElementById('overlayBackdrop').classList.add('active'); }
-    document.getElementById('menuBtn').onclick = openMenu;
-    document.getElementById('closeMenuBtn').onclick = closeMenu;
-    document.getElementById('overlayBackdrop').onclick = closeMenu;
-    document.getElementById('notificationsItem').onclick = () => showToast("🔔 Notifications: You'll be alerted about new posts and replies soon!");
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
 
-    // UI toggles
-    document.getElementById('adminLoginBtn').onclick = () => { document.getElementById('adminLoginForm').classList.toggle('hidden'); document.getElementById('memberMagicForm').classList.add('hidden'); };
-    document.getElementById('memberMagicBtn').onclick = () => { document.getElementById('memberMagicForm').classList.toggle('hidden'); document.getElementById('adminLoginForm').classList.add('hidden'); };
-
-    // ----- Magic Link for Members (NO password, NO conflict) -----
-    document.getElementById('sendMagicLink').onclick = async () => {
-        const name = document.getElementById('memberName').value.trim();
-        const email = document.getElementById('memberEmail').value.trim();
-        if (!name || !email) { alert("Please enter both name and email."); return; }
-        // Save name in localStorage temporarily
-        localStorage.setItem('pendingMemberName', name);
-        const actionCodeSettings = { url: window.location.href, handleCodeInApp: true };
+    // ========== AUTH ==========
+    document.getElementById('adminLoginBtn').onclick = () => {
+        document.getElementById('adminLoginForm').classList.toggle('hidden');
+    };
+    document.getElementById('memberJoinBtn').onclick = async () => {
+        const name = prompt("Enter your name (e.g., Favour):");
+        if (!name) return;
+        const email = prompt("Enter your email address:");
+        if (!email) return;
+        const randomPassword = Math.random().toString(36).slice(-10);
         try {
-            await auth.sendSignInLinkToEmail(email, actionCodeSettings);
-            localStorage.setItem('emailForSignIn', email);
-            showToast(`✨ Magic link sent to ${email}. Check your inbox. ✨`);
+            const cred = await auth.createUserWithEmailAndPassword(email, randomPassword);
+            await db.collection('users').doc(cred.user.uid).set({
+                name: name,
+                email: email,
+                role: 'member',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            showToast(`✨ Beautifully decorated! ✨`);
+            setTimeout(() => showToast(`Welcome, ${name}! 🎉`), 1500);
         } catch (err) {
             alert("Error: " + err.message);
         }
     };
-
-    // Handle magic link sign-in
-    if (window.location.search.includes('mode=signIn') || (auth.isSignInWithEmailLink && auth.isSignInWithEmailLink(window.location.href))) {
-        let email = localStorage.getItem('emailForSignIn');
-        if (!email) email = prompt("Please enter your email to complete sign-in");
-        if (email) {
-            auth.signInWithEmailLink(email, window.location.href)
-                .then(async (result) => {
-                    localStorage.removeItem('emailForSignIn');
-                    const pendingName = localStorage.getItem('pendingMemberName');
-                    localStorage.removeItem('pendingMemberName');
-                    const user = result.user;
-                    const userDocSnap = await db.collection('users').doc(user.uid).get();
-                    if (!userDocSnap.exists) {
-                        const finalName = pendingName || "Disciple";
-                        await db.collection('users').doc(user.uid).set({
-                            name: finalName,
-                            email: user.email,
-                            role: 'member',
-                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                        });
-                        showToast(`✨ Welcome, ${finalName}! You're part of the community now.`);
-                    } else {
-                        showToast(`✨ Welcome back, ${userDocSnap.data().name}!`);
-                    }
-                    window.location.href = window.location.origin + window.location.pathname;
-                })
-                .catch(err => { alert("Sign-in failed: " + err.message); window.location.href = window.location.origin + window.location.pathname; });
-        }
-    }
-
-    // Admin login (email/password)
     document.getElementById('submitAdminLogin').onclick = async () => {
         const email = document.getElementById('adminEmail').value;
         const pwd = document.getElementById('adminPassword').value;
-        try { await auth.signInWithEmailAndPassword(email, pwd); }
-        catch(err) { document.getElementById('loginError').innerText = err.message; }
+        try {
+            await auth.signInWithEmailAndPassword(email, pwd);
+        } catch (err) {
+            document.getElementById('loginError').innerText = err.message;
+        }
     };
-    document.getElementById('logoutBtn').onclick = () => auth.signOut();
+    document.getElementById('logoutBtn').onclick = async () => await auth.signOut();
 
     auth.onAuthStateChanged(async (user) => {
         if (user) {
@@ -217,7 +375,8 @@
             isAdmin = adminEmails.includes(user.email);
             document.getElementById('loginScreen').style.display = 'none';
             document.getElementById('appContainer').classList.remove('hidden');
-            document.getElementById('adminMenuItem').style.display = isAdmin ? 'flex' : 'none';
+            document.getElementById('adminTabBtn').style.display = isAdmin ? 'flex' : 'none';
+            // Personalized welcome
             const name = userDoc?.name || (isAdmin ? 'Admin' : 'Disciple');
             showToast(`✨ Beautifully decorated! ✨`);
             setTimeout(() => showToast(`Welcome, ${name}! 🎉`), 1500);
@@ -226,104 +385,119 @@
         } else {
             document.getElementById('loginScreen').style.display = 'flex';
             document.getElementById('appContainer').classList.add('hidden');
-            Object.values(unsubscribers).forEach(fn => fn && fn());
-            unsubscribers = {};
+            if (window.postsUnsub) window.postsUnsub();
+            if (window.prayersUnsub) window.prayersUnsub();
+            if (window.challengesUnsub) window.challengesUnsub();
+            if (window.testimoniesUnsub) window.testimoniesUnsub();
         }
     });
 
+    // Firestore listeners (optimized)
     function startListeners() {
-        if (unsubscribers.posts) unsubscribers.posts();
-        unsubscribers.posts = db.collection('posts').orderBy('timestamp', 'desc').limit(30).onSnapshot(() => {
+        if (window.postsUnsub) window.postsUnsub();
+        window.postsUnsub = db.collection('posts').orderBy('timestamp', 'desc').limit(30).onSnapshot(() => {
             if (currentTab === 'feed') renderFeed();
         });
-        if (unsubscribers.prayers) unsubscribers.prayers();
-        unsubscribers.prayers = db.collection('prayers').orderBy('timestamp', 'desc').onSnapshot(() => {
+        if (window.prayersUnsub) window.prayersUnsub();
+        window.prayersUnsub = db.collection('prayers').orderBy('timestamp', 'desc').onSnapshot(() => {
             if (currentTab === 'prayer') renderPrayerWall();
         });
-        if (unsubscribers.challenges) unsubscribers.challenges();
+        if (window.challengesUnsub) window.challengesUnsub();
         let challengesQuery = db.collection('challenges');
-        if (!isAdmin) challengesQuery = challengesQuery.where('userId', '==', currentUser.uid);
-        unsubscribers.challenges = challengesQuery.orderBy('timestamp', 'desc').onSnapshot(() => {
+        if (!isAdmin && currentUser) challengesQuery = challengesQuery.where('userId', '==', currentUser.uid);
+        window.challengesUnsub = challengesQuery.orderBy('timestamp', 'desc').onSnapshot(() => {
             if (currentTab === 'challenges') renderChallenges();
         });
-        if (unsubscribers.testimonies) unsubscribers.testimonies();
-        unsubscribers.testimonies = db.collection('testimonies').orderBy('timestamp', 'desc').onSnapshot(() => {
+        if (window.testimoniesUnsub) window.testimoniesUnsub();
+        window.testimoniesUnsub = db.collection('testimonies').orderBy('timestamp', 'desc').onSnapshot(() => {
             if (currentTab === 'testimonies') renderTestimonies();
         });
-        if (isAdmin && unsubscribers.allUsers) unsubscribers.allUsers();
-        if (isAdmin) {
-            unsubscribers.allUsers = db.collection('users').onSnapshot(() => {
-                if (currentTab === 'admin') renderAdmin();
-            });
-        }
     }
 
-    // ========== RENDER FUNCTIONS (all working, journal works) ==========
+    // ========== RENDER FUNCTIONS (Optimized) ==========
     async function renderHome() {
         const verseDoc = await db.collection('settings').doc('dailyVerse').get();
         let verse = { ref: 'Psalm 118:24', text: 'This is the day the Lord has made; let us rejoice and be glad in it.' };
         if (verseDoc.exists) verse = verseDoc.data();
         const name = userDoc?.name || (isAdmin ? 'Admin' : 'Disciple');
-        document.getElementById('mainContent').innerHTML = `
-            <div class="card"><h2>🙏 Hello, ${escapeHtml(name)}</h2><p>Welcome to your spiritual home.</p></div>
-            <div class="card"><h3>📖 Daily Verse</h3><p style="font-style: italic; margin: 12px 0;">“${escapeHtml(verse.text)}”</p><p style="text-align: right;">— ${escapeHtml(verse.ref)}</p></div>
-            <div class="card"><h3>🌟 Today's Encouragement</h3><p>You are not alone. God is with you.</p></div>
-            <div class="card"><h3>🎵 Worship Moment</h3><p><i class="fas fa-headphones"></i> “Way Maker” – Sinach</p></div>
-            <div class="card"><h3>📲 Quick Connect</h3><div style="display: flex; gap: 20px; justify-content: center; margin-top: 12px;">
-                <a href="https://whatsapp.com/channel/0029Vb7dH5k0wajp7QiO6A2m" target="_blank" style="color: var(--secondary);"><i class="fab fa-whatsapp fa-2x"></i></a>
-                <a href="https://www.instagram.com/dominion_outreach/?hl=en" target="_blank" style="color: var(--primary);"><i class="fab fa-instagram fa-2x"></i></a>
-                <a href="https://favour-37.github.io/Dominion-Outreach/" target="_blank" style="color: var(--text);"><i class="fas fa-globe fa-2x"></i></a>
-                <a href="mailto:dominionoutreachofficial@gmail.com" style="color: var(--accent);"><i class="fas fa-envelope fa-2x"></i></a>
-            </div></div>
+        const html = `
+            <div class="card">
+                <h2>🙏 Hello, ${escapeHtml(name)}</h2>
+                <p>Welcome to your spiritual home. May you find peace, purpose, and intimacy with the Father.</p>
+            </div>
+            <div class="card">
+                <h3>📖 Daily Verse</h3>
+                <p style="font-style: italic; margin: 12px 0;">“${escapeHtml(verse.text)}”</p>
+                <p style="text-align: right;">— ${escapeHtml(verse.ref)}</p>
+            </div>
+            <div class="card">
+                <h3>🌟 Today's Encouragement</h3>
+                <p>You are not alone. God is with you, and this community is praying for you.</p>
+            </div>
+            <div class="card">
+                <h3>🎵 Worship Moment</h3>
+                <p><i class="fas fa-headphones"></i> “Way Maker” – Sinach</p>
+            </div>
+            <div class="card">
+                <h3>📲 Quick Connect</h3>
+                <div style="display: flex; gap: 20px; justify-content: center; margin-top: 12px;">
+                    <a href="https://whatsapp.com/channel/0029Vb7dH5k0wajp7QiO6A2m" target="_blank" style="color: var(--secondary);"><i class="fab fa-whatsapp fa-2x"></i></a>
+                    <a href="https://www.instagram.com/dominion_outreach/?hl=en" target="_blank" style="color: var(--primary);"><i class="fab fa-instagram fa-2x"></i></a>
+                    <a href="https://favour-37.github.io/Dominion-Outreach/" target="_blank" style="color: var(--text);"><i class="fas fa-globe fa-2x"></i></a>
+                    <a href="mailto:dominionoutreachofficial@gmail.com" style="color: var(--accent);"><i class="fas fa-envelope fa-2x"></i></a>
+                </div>
+            </div>
         `;
-    }
-
-    async function renderJournal() {
-        const snapshot = await db.collection('users').doc(currentUser.uid).collection('journal').orderBy('timestamp', 'desc').get();
-        let html = `<div class="card"><h3>📔 Personal Journal</h3><input type="text" id="journalTitle" placeholder="Title"><textarea id="journalContent" rows="4" placeholder="Write your thoughts..."></textarea><button id="addJournalEntry">Save Entry</button></div><div id="journalList"></div>`;
         document.getElementById('mainContent').innerHTML = html;
-        const listDiv = document.getElementById('journalList');
-        if (snapshot.empty) listDiv.innerHTML = '<div class="card">No journal entries yet.</div>';
-        else {
-            let entries = '';
-            snapshot.forEach(doc => {
-                const entry = doc.data();
-                entries += `<div class="card"><h3>${escapeHtml(entry.title)}</h3><div style="font-size:0.75rem;">${new Date(entry.timestamp?.toDate()).toLocaleString()}</div><p>${escapeHtml(entry.content)}</p><button class="delete-journal" data-id="${doc.id}" style="background: none; color: var(--text-secondary);">Delete</button></div>`;
-            });
-            listDiv.innerHTML = entries;
-        }
-        document.getElementById('addJournalEntry')?.addEventListener('click', async () => {
-            const title = document.getElementById('journalTitle').value.trim();
-            const content = document.getElementById('journalContent').value.trim();
-            if (!title || !content) return alert("Fill both");
-            await db.collection('users').doc(currentUser.uid).collection('journal').add({ title, content, timestamp: firebase.firestore.FieldValue.serverTimestamp() });
-            renderJournal();
-            showToast("Journal entry saved.");
-        });
-        document.querySelectorAll('.delete-journal').forEach(btn => {
-            btn.onclick = async () => { await db.collection('users').doc(currentUser.uid).collection('journal').doc(btn.dataset.id).delete(); renderJournal(); };
-        });
     }
 
     async function renderFeed() {
         const snapshot = await db.collection('posts').orderBy('timestamp', 'desc').limit(30).get();
-        if (snapshot.empty) { document.getElementById('mainContent').innerHTML = '<div class="card">No posts yet.</div>'; return; }
+        if (snapshot.empty) {
+            document.getElementById('mainContent').innerHTML = '<div class="card">No posts yet. Admin will share soon.</div>';
+            return;
+        }
         let html = '';
         snapshot.forEach(doc => {
             const p = doc.data();
-            const media = p.mediaUrl ? (p.mediaType === 'image' ? `<div><img src="${p.mediaUrl}" style="width:100%; border-radius:16px;"></div>` : `<div><video controls src="${p.mediaUrl}" style="width:100%; border-radius:16px;"></video></div>`) : '';
-            html += `<div class="card"><h3>${escapeHtml(p.title)}</h3><div style="font-size:0.75rem;">${new Date(p.timestamp?.toDate()).toLocaleDateString()}</div><p>${escapeHtml(p.content)}</p>${media}
-                <div><button class="like-post" data-id="${doc.id}">❤️ ${p.likes || 0}</button>
-                <button class="comment-toggle" data-id="${doc.id}">💬 ${(p.comments || []).length}</button></div>
-                <div class="comment-section hidden" id="comments-${doc.id}"><div id="commentsList-${doc.id}">${(p.comments || []).map(c => `<div><strong>${escapeHtml(c.name)}</strong>: ${escapeHtml(c.text)}</div>`).join('')}</div>
-                <div><input type="text" id="commentInput-${doc.id}" placeholder="Write a comment..."><button class="submit-comment" data-id="${doc.id}">Post</button></div></div></div>`;
+            const mediaHtml = p.mediaUrl ? (p.mediaType === 'image' ? `<div class="post-media"><img src="${p.mediaUrl}" loading="lazy"></div>` :
+                `<div class="post-media"><video controls src="${p.mediaUrl}"></video></div>`) : '';
+            html += `
+                <div class="card" data-id="${doc.id}">
+                    <h3>${escapeHtml(p.title)}</h3>
+                    <div style="font-size:0.75rem; color:var(--text-secondary);">${new Date(p.timestamp?.toDate()).toLocaleDateString()}</div>
+                    <div style="margin: 12px 0;">${escapeHtml(p.content)}</div>
+                    ${mediaHtml}
+                    <div class="post-stats">
+                        <button class="like-post" data-id="${doc.id}"><i class="far fa-heart"></i> ${p.likes || 0}</button>
+                        <button class="comment-toggle" data-id="${doc.id}"><i class="far fa-comment"></i> ${(p.comments || []).length}</button>
+                    </div>
+                    <div class="comment-section hidden" id="comments-${doc.id}">
+                        <div id="commentsList-${doc.id}">${(p.comments || []).map(c => `<div class="comment"><strong>${escapeHtml(c.name)}</strong>: ${escapeHtml(c.text)}</div>`).join('')}</div>
+                        <div class="comment-input">
+                            <input type="text" id="commentInput-${doc.id}" placeholder="Write a comment...">
+                            <button class="submit-comment" data-id="${doc.id}">Post</button>
+                        </div>
+                    </div>
+                </div>
+            `;
         });
         document.getElementById('mainContent').innerHTML = html;
         attachFeedEvents();
     }
     function attachFeedEvents() {
-        document.querySelectorAll('.like-post').forEach(btn => { btn.onclick = async () => { await db.collection('posts').doc(btn.dataset.id).update({ likes: firebase.firestore.FieldValue.increment(1) }); }; });
-        document.querySelectorAll('.comment-toggle').forEach(btn => { btn.onclick = () => { document.getElementById(`comments-${btn.dataset.id}`).classList.toggle('hidden'); }; });
+        document.querySelectorAll('.like-post').forEach(btn => {
+            btn.onclick = async () => {
+                const id = btn.dataset.id;
+                await db.collection('posts').doc(id).update({ likes: firebase.firestore.FieldValue.increment(1) });
+            };
+        });
+        document.querySelectorAll('.comment-toggle').forEach(btn => {
+            btn.onclick = () => {
+                const id = btn.dataset.id;
+                document.getElementById(`comments-${id}`).classList.toggle('hidden');
+            };
+        });
         document.querySelectorAll('.submit-comment').forEach(btn => {
             btn.onclick = async () => {
                 const id = btn.dataset.id;
@@ -331,7 +505,9 @@
                 const text = input.value.trim();
                 if (!text) return;
                 const name = userDoc?.name || (isAdmin ? 'Admin' : 'Disciple');
-                await db.collection('posts').doc(id).update({ comments: firebase.firestore.FieldValue.arrayUnion({ name, text, timestamp: new Date().toISOString() }) });
+                await db.collection('posts').doc(id).update({
+                    comments: firebase.firestore.FieldValue.arrayUnion({ name, text, timestamp: new Date().toISOString() })
+                });
                 input.value = '';
             };
         });
@@ -339,15 +515,33 @@
 
     async function renderPrayerWall() {
         const snapshot = await db.collection('prayers').orderBy('timestamp', 'desc').get();
-        let html = `<div class="card"><h3>🕯️ Submit a Prayer Request</h3><input type="text" id="prayerName" placeholder="Your name" value="${escapeHtml(userDoc?.name || '')}"><textarea id="prayerText" rows="3" placeholder="What can we pray about?"></textarea><button id="submitPrayer">Submit</button></div><div id="prayerList"></div>`;
+        let html = `
+            <div class="card">
+                <h3>🕯️ Submit a Prayer Request</h3>
+                <input type="text" id="prayerName" placeholder="Your name" value="${escapeHtml(userDoc?.name || '')}">
+                <textarea id="prayerText" rows="3" placeholder="What can we pray about?"></textarea>
+                <button id="submitPrayer">Submit</button>
+            </div>
+            <div id="prayerList"></div>
+        `;
         document.getElementById('mainContent').innerHTML = html;
         const listDiv = document.getElementById('prayerList');
-        if (snapshot.empty) listDiv.innerHTML = '<div class="card">Be the first to share.</div>';
-        else {
+        if (snapshot.empty) {
+            listDiv.innerHTML = '<div class="card">Be the first to share a prayer request.</div>';
+        } else {
             let prayersHtml = '';
             snapshot.forEach(doc => {
                 const p = doc.data();
-                prayersHtml += `<div class="card"><div><strong>${escapeHtml(p.name) || 'Anonymous'}</strong></div><p>${escapeHtml(p.text)}</p><div style="display:flex; justify-content:space-between;"><span>${new Date(p.timestamp?.toDate()).toLocaleDateString()}</span><button class="pray-for" data-id="${doc.id}">🙏 ${p.prayCount || 0}</button></div></div>`;
+                prayersHtml += `
+                    <div class="card">
+                        <div><strong>${escapeHtml(p.name) || 'Anonymous'}</strong></div>
+                        <p>${escapeHtml(p.text)}</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+                            <span style="font-size:0.75rem;">${new Date(p.timestamp?.toDate()).toLocaleDateString()}</span>
+                            <button class="pray-for" data-id="${doc.id}">🙏 Prayed (${p.prayCount || 0})</button>
+                        </div>
+                    </div>
+                `;
             });
             listDiv.innerHTML = prayersHtml;
         }
@@ -355,139 +549,256 @@
             const name = document.getElementById('prayerName').value.trim();
             const text = document.getElementById('prayerText').value.trim();
             if (!text) return;
-            await db.collection('prayers').add({ name: name || (userDoc?.name || 'Anonymous'), text, timestamp: firebase.firestore.FieldValue.serverTimestamp(), prayCount: 0 });
+            await db.collection('prayers').add({
+                name: name || (userDoc?.name || 'Anonymous'),
+                text,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                prayCount: 0
+            });
             document.getElementById('prayerText').value = '';
-            showToast("Prayer request submitted.");
+            showToast('Prayer request submitted.');
         });
-        document.querySelectorAll('.pray-for').forEach(btn => { btn.onclick = async () => { await db.collection('prayers').doc(btn.dataset.id).update({ prayCount: firebase.firestore.FieldValue.increment(1) }); }; });
+        document.querySelectorAll('.pray-for').forEach(btn => {
+            btn.onclick = async () => {
+                await db.collection('prayers').doc(btn.dataset.id).update({ prayCount: firebase.firestore.FieldValue.increment(1) });
+            };
+        });
+    }
+
+    async function renderJournal() {
+        const snapshot = await db.collection('users').doc(currentUser.uid).collection('journal').orderBy('timestamp', 'desc').get();
+        let html = `
+            <div class="card">
+                <h3>📔 Personal Journal</h3>
+                <input type="text" id="journalTitle" placeholder="Title">
+                <textarea id="journalContent" rows="4" placeholder="Write your thoughts, prayers, reflections..."></textarea>
+                <button id="addJournalEntry">Save Entry</button>
+            </div>
+            <div id="journalList"></div>
+        `;
+        document.getElementById('mainContent').innerHTML = html;
+        const listDiv = document.getElementById('journalList');
+        if (snapshot.empty) {
+            listDiv.innerHTML = '<div class="card">No journal entries yet. Start writing!</div>';
+        } else {
+            let entriesHtml = '';
+            snapshot.forEach(doc => {
+                const entry = doc.data();
+                entriesHtml += `
+                    <div class="card">
+                        <h3>${escapeHtml(entry.title)}</h3>
+                        <div style="font-size:0.75rem;">${new Date(entry.timestamp?.toDate()).toLocaleString()}</div>
+                        <p>${escapeHtml(entry.content)}</p>
+                        <button class="delete-journal" data-id="${doc.id}" style="background: none; color: var(--text-secondary);">Delete</button>
+                    </div>
+                `;
+            });
+            listDiv.innerHTML = entriesHtml;
+        }
+        document.getElementById('addJournalEntry')?.addEventListener('click', async () => {
+            const title = document.getElementById('journalTitle').value.trim();
+            const content = document.getElementById('journalContent').value.trim();
+            if (!title || !content) return alert('Please fill both');
+            await db.collection('users').doc(currentUser.uid).collection('journal').add({
+                title, content, timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            renderJournal();
+            showToast('Journal entry saved.');
+        });
+        document.querySelectorAll('.delete-journal').forEach(btn => {
+            btn.onclick = async () => {
+                await db.collection('users').doc(currentUser.uid).collection('journal').doc(btn.dataset.id).delete();
+                renderJournal();
+            };
+        });
     }
 
     async function renderTestimonies() {
         const snapshot = await db.collection('testimonies').orderBy('timestamp', 'desc').get();
-        let html = `<div class="card"><h3>🌟 Share Your Testimony</h3><textarea id="testimonyText" rows="3" placeholder="Write your testimony..."></textarea><button id="submitTestimony">Share</button></div><div id="testimoniesList"></div>`;
+        let html = `
+            <div class="card">
+                <h3>🌟 Share Your Testimony</h3>
+                <textarea id="testimonyText" rows="3" placeholder="Write your testimony..."></textarea>
+                <button id="submitTestimony">Share</button>
+            </div>
+            <div id="testimoniesList"></div>
+        `;
         document.getElementById('mainContent').innerHTML = html;
         const listDiv = document.getElementById('testimoniesList');
-        if (snapshot.empty) listDiv.innerHTML = '<div class="card">No testimonies yet.</div>';
-        else {
-            let tHtml = '';
+        if (snapshot.empty) {
+            listDiv.innerHTML = '<div class="card">No testimonies yet. Be the first to share God’s goodness!</div>';
+        } else {
+            let htmlList = '';
             snapshot.forEach(doc => {
                 const t = doc.data();
-                tHtml += `<div class="card"><div><strong>${escapeHtml(t.name)}</strong> <span style="font-size:0.75rem;">${new Date(t.timestamp?.toDate()).toLocaleDateString()}</span></div><p>"${escapeHtml(t.text)}"</p><button class="like-testimony" data-id="${doc.id}">❤️ ${t.likes || 0}</button></div>`;
+                htmlList += `
+                    <div class="card">
+                        <div><strong>${escapeHtml(t.name)}</strong> <span style="font-size:0.75rem;">${new Date(t.timestamp?.toDate()).toLocaleDateString()}</span></div>
+                        <p style="margin-top: 8px;">"${escapeHtml(t.text)}"</p>
+                        <button class="like-testimony" data-id="${doc.id}">❤️ ${t.likes || 0}</button>
+                    </div>
+                `;
             });
-            listDiv.innerHTML = tHtml;
+            listDiv.innerHTML = htmlList;
         }
         document.getElementById('submitTestimony')?.addEventListener('click', async () => {
             const text = document.getElementById('testimonyText').value.trim();
             if (!text) return;
-            await db.collection('testimonies').add({ text, name: userDoc?.name || (isAdmin ? 'Admin' : 'Disciple'), timestamp: firebase.firestore.FieldValue.serverTimestamp(), likes: 0 });
+            await db.collection('testimonies').add({
+                text,
+                name: userDoc?.name || (isAdmin ? 'Admin' : 'Disciple'),
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                likes: 0
+            });
             document.getElementById('testimonyText').value = '';
-            showToast("Thank you for sharing!");
+            showToast('Thank you for sharing!');
         });
-        document.querySelectorAll('.like-testimony').forEach(btn => { btn.onclick = async () => { await db.collection('testimonies').doc(btn.dataset.id).update({ likes: firebase.firestore.FieldValue.increment(1) }); }; });
+        document.querySelectorAll('.like-testimony').forEach(btn => {
+            btn.onclick = async () => {
+                await db.collection('testimonies').doc(btn.dataset.id).update({ likes: firebase.firestore.FieldValue.increment(1) });
+            };
+        });
     }
 
     async function renderChallenges() {
         let query = db.collection('challenges');
         if (!isAdmin) query = query.where('userId', '==', currentUser.uid);
         const snapshot = await query.orderBy('timestamp', 'desc').get();
-        let html = `<div class="card"><h3>🔒 Private Prayer / Challenge</h3><p>Only you and admin can see.</p><textarea id="challengeText" rows="3" placeholder="What’s on your heart?"></textarea><button id="submitChallenge">Submit (Private)</button></div><div id="challengesList"></div>`;
+        let html = `
+            <div class="card">
+                <h3>🔒 Private Prayer / Challenge</h3>
+                <p>Share something only the admin can see. We will reply to you privately.</p>
+                <textarea id="challengeText" rows="3" placeholder="What’s on your heart?"></textarea>
+                <button id="submitChallenge">Submit (Private)</button>
+            </div>
+            <div id="challengesList"></div>
+        `;
         document.getElementById('mainContent').innerHTML = html;
         const listDiv = document.getElementById('challengesList');
-        if (snapshot.empty) listDiv.innerHTML = '<div class="card">No private entries.</div>';
-        else {
-            let cHtml = '';
+        if (snapshot.empty) {
+            listDiv.innerHTML = '<div class="card">No private entries yet. You can share anything here.</div>';
+        } else {
+            let challengesHtml = '';
             snapshot.forEach(doc => {
                 const c = doc.data();
-                cHtml += `<div class="card"><div style="display: flex; justify-content: space-between;"><strong>${new Date(c.timestamp?.toDate()).toLocaleString()}</strong>${isAdmin ? `<span>From: ${escapeHtml(c.userName)}</span>` : ''}</div>
-                    <p>${escapeHtml(c.text)}</p>${c.reply ? `<div class="reply-box"><strong>Admin reply:</strong> ${escapeHtml(c.reply)}</div>` : ''}
-                    ${isAdmin && !c.reply ? `<textarea id="reply-${doc.id}" placeholder="Write a reply..."></textarea><button class="reply-challenge" data-id="${doc.id}">Send Reply</button>` : ''}</div>`;
+                challengesHtml += `
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between;">
+                            <strong>${new Date(c.timestamp?.toDate()).toLocaleString()}</strong>
+                            ${isAdmin ? `<span>From: ${escapeHtml(c.userName)}</span>` : ''}
+                        </div>
+                        <p style="margin-top: 8px;">${escapeHtml(c.text)}</p>
+                        ${c.reply ? `<div class="reply-box"><strong>Admin reply:</strong> ${escapeHtml(c.reply)}</div>` : ''}
+                        ${isAdmin && !c.reply ? `
+                            <textarea id="reply-${doc.id}" placeholder="Write a reply..."></textarea>
+                            <button class="reply-challenge" data-id="${doc.id}">Send Reply</button>
+                        ` : ''}
+                    </div>
+                `;
             });
-            listDiv.innerHTML = cHtml;
+            listDiv.innerHTML = challengesHtml;
         }
         document.getElementById('submitChallenge')?.addEventListener('click', async () => {
             const text = document.getElementById('challengeText').value.trim();
             if (!text) return;
-            await db.collection('challenges').add({ userId: currentUser.uid, userName: userDoc?.name || (isAdmin ? 'Admin' : 'Disciple'), text, timestamp: firebase.firestore.FieldValue.serverTimestamp(), reply: null });
+            await db.collection('challenges').add({
+                userId: currentUser.uid,
+                userName: userDoc?.name || (isAdmin ? 'Admin' : 'Disciple'),
+                text: text,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                reply: null
+            });
             document.getElementById('challengeText').value = '';
-            showToast("Private message sent.");
+            showToast('Your private message has been sent to the admin.');
         });
         document.querySelectorAll('.reply-challenge').forEach(btn => {
             btn.onclick = async () => {
                 const id = btn.dataset.id;
-                const reply = document.getElementById(`reply-${id}`).value.trim();
-                if (!reply) return;
-                await db.collection('challenges').doc(id).update({ reply });
-                showToast("Reply sent.");
+                const replyText = document.getElementById(`reply-${id}`).value.trim();
+                if (!replyText) return;
+                await db.collection('challenges').doc(id).update({ reply: replyText });
+                showToast('Reply sent.');
                 renderChallenges();
             };
         });
     }
 
     function renderConnect() {
-        document.getElementById('mainContent').innerHTML = `
-            <div class="card"><h3>📱 Connect With Us</h3><div style="display: flex; flex-direction: column; gap: 20px;">
-                <a href="https://whatsapp.com/channel/0029Vb7dH5k0wajp7QiO6A2m" target="_blank" style="color: var(--secondary);">📱 WhatsApp Channel</a>
-                <a href="https://www.instagram.com/dominion_outreach/?hl=en" target="_blank" style="color: var(--primary);">📸 Instagram</a>
-                <a href="https://favour-37.github.io/Dominion-Outreach/" target="_blank" style="color: var(--text);">🌐 Our Website</a>
-                <a href="mailto:dominionoutreachofficial@gmail.com" style="color: var(--accent);">✉️ Email Support</a>
-            </div></div>
+        const html = `
+            <div class="card">
+                <h3>📱 Connect With Us</h3>
+                <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 20px;">
+                    <a href="https://whatsapp.com/channel/0029Vb7dH5k0wajp7QiO6A2m" target="_blank" style="color: var(--secondary); text-decoration: none; font-size: 1.2rem;"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a>
+                    <a href="https://www.instagram.com/dominion_outreach/?hl=en" target="_blank" style="color: var(--primary); text-decoration: none; font-size: 1.2rem;"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="https://favour-37.github.io/Dominion-Outreach/" target="_blank" style="color: var(--text); text-decoration: none; font-size: 1.2rem;"><i class="fas fa-globe"></i> Our Website</a>
+                    <a href="mailto:dominionoutreachofficial@gmail.com" style="color: var(--accent); text-decoration: none; font-size: 1.2rem;"><i class="fas fa-envelope"></i> Email Support</a>
+                </div>
+            </div>
+            <div class="card">
+                <h3>🙌 Get Involved</h3>
+                <p>Join our WhatsApp channel for daily prayers, follow us on Instagram for inspiration, and visit our website for more resources.</p>
+            </div>
         `;
+        document.getElementById('mainContent').innerHTML = html;
     }
 
     async function renderAdmin() {
-        const usersSnapshot = await db.collection('users').get();
-        let html = `<div class="card"><h3>👑 Admin Dashboard</h3><p>Total users: ${usersSnapshot.size}</p></div>`;
-        html += `<div class="card"><h3>✍️ Post New Devotional</h3><input type="text" id="postTitle" placeholder="Title"><textarea id="postContent" rows="4" placeholder="Reflection"></textarea><input type="file" id="postMedia" accept="image/*,video/*"><button id="publishPostBtn">Publish</button><div id="uploadStatus"></div></div>`;
+        let html = `
+            <div class="card">
+                <h3>✍️ Post New Devotional</h3>
+                <input type="text" id="postTitle" placeholder="Title">
+                <textarea id="postContent" rows="4" placeholder="Scripture / Reflection"></textarea>
+                <input type="file" id="postMedia" accept="image/*,video/*">
+                <button id="publishPostBtn">Publish Post</button>
+                <div id="uploadStatus"></div>
+            </div>
+            <div id="adminPostsList"></div>
+        `;
+        document.getElementById('mainContent').innerHTML = html;
         const postsSnapshot = await db.collection('posts').orderBy('timestamp', 'desc').get();
-        html += `<h3>Manage Posts</h3>`;
+        let postsHtml = '<h3>Manage Posts</h3>';
         postsSnapshot.forEach(doc => {
             const p = doc.data();
-            html += `<div class="card"><strong>${escapeHtml(p.title)}</strong> <button class="delete-post" data-id="${doc.id}" style="background:#FF3B30;">Delete</button></div>`;
+            postsHtml += `
+                <div class="card">
+                    <strong>${escapeHtml(p.title)}</strong> – ${new Date(p.timestamp?.toDate()).toLocaleDateString()}
+                    <button class="delete-post" data-id="${doc.id}" style="background: #FF3B30; margin-top: 8px;">Delete Post</button>
+                </div>
+            `;
         });
-        html += `<h3>👥 Users & Activity</h3>`;
-        for (const userDocSnap of usersSnapshot.docs) {
-            const userData = userDocSnap.data();
-            const userId = userDocSnap.id;
-            const challengesSnap = await db.collection('challenges').where('userId', '==', userId).get();
-            const journalSnap = await db.collection('users').doc(userId).collection('journal').get();
-            html += `<div class="card admin-user-card"><h4>${escapeHtml(userData.name)} (${escapeHtml(userData.email)})</h4>
-                <details><summary>🔒 Challenges (${challengesSnap.size})</summary>`;
-            challengesSnap.forEach(ch => {
-                const c = ch.data();
-                html += `<div><strong>${new Date(c.timestamp?.toDate()).toLocaleString()}</strong><br>${escapeHtml(c.text)}<br>
-                    ${c.reply ? `Admin replied: ${escapeHtml(c.reply)}` : `<textarea id="adminReply-${ch.id}" placeholder="Reply..."></textarea><button class="admin-reply-challenge" data-id="${ch.id}">Reply</button>`}</div>`;
-            });
-            html += `</details><details><summary>📔 Journal (${journalSnap.size})</summary>`;
-            journalSnap.forEach(j => { const jrn = j.data(); html += `<div><strong>${jrn.title}</strong> – ${new Date(jrn.timestamp?.toDate()).toLocaleString()}<br>${escapeHtml(jrn.content)}</div>`; });
-            html += `</details></div>`;
-        }
-        document.getElementById('mainContent').innerHTML = html;
+        document.getElementById('adminPostsList').innerHTML = postsHtml;
 
         document.getElementById('publishPostBtn')?.addEventListener('click', async () => {
             const title = document.getElementById('postTitle').value.trim();
             const content = document.getElementById('postContent').value.trim();
-            if (!title || !content) return alert("Fill both");
+            if (!title || !content) return alert('Title and content required');
             const file = document.getElementById('postMedia').files[0];
             let mediaUrl = null, mediaType = null;
+            const statusDiv = document.getElementById('uploadStatus');
             if (file) {
-                const fd = new FormData(); fd.append('file', file); fd.append('upload_preset', UPLOAD_PRESET);
-                const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`, { method: 'POST', body: fd });
-                const data = await res.json();
-                mediaUrl = data.secure_url;
-                mediaType = file.type.startsWith('image/') ? 'image' : 'video';
+                statusDiv.innerText = 'Uploading...';
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('upload_preset', UPLOAD_PRESET);
+                try {
+                    const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`, { method: 'POST', body: formData });
+                    const data = await res.json();
+                    mediaUrl = data.secure_url;
+                    mediaType = file.type.startsWith('image/') ? 'image' : 'video';
+                } catch (err) {}
             }
-            await db.collection('posts').add({ title, content, mediaUrl, mediaType, timestamp: firebase.firestore.FieldValue.serverTimestamp(), likes: 0, comments: [] });
-            alert("Post published!");
+            await db.collection('posts').add({
+                title, content, mediaUrl, mediaType,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                likes: 0,
+                comments: []
+            });
+            alert('Post published!');
             renderAdmin();
         });
-        document.querySelectorAll('.delete-post').forEach(btn => { btn.onclick = async () => { if(confirm("Delete?")) await db.collection('posts').doc(btn.dataset.id).delete(); renderAdmin(); }; });
-        document.querySelectorAll('.admin-reply-challenge').forEach(btn => {
+        document.querySelectorAll('.delete-post').forEach(btn => {
             btn.onclick = async () => {
-                const id = btn.dataset.id;
-                const reply = document.getElementById(`adminReply-${id}`).value.trim();
-                if (!reply) return;
-                await db.collection('challenges').doc(id).update({ reply });
-                showToast("Reply sent");
+                if (confirm('Delete this post?')) await db.collection('posts').doc(btn.dataset.id).delete();
                 renderAdmin();
             };
         });
@@ -497,20 +808,27 @@
         currentTab = tab;
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelector(`.tab-btn[data-tab="${tab}"]`)?.classList.add('active');
-        const renderMap = { home: renderHome, journal: renderJournal, feed: renderFeed, connect: renderConnect, prayer: renderPrayerWall, testimonies: renderTestimonies, challenges: renderChallenges, admin: isAdmin ? renderAdmin : () => {} };
-        if (renderMap[tab]) renderMap[tab]();
-        closeMenu();
+        if (tab === 'home') renderHome();
+        else if (tab === 'feed') renderFeed();
+        else if (tab === 'prayer') renderPrayerWall();
+        else if (tab === 'journal') renderJournal();
+        else if (tab === 'testimonies') renderTestimonies();
+        else if (tab === 'challenges') renderChallenges();
+        else if (tab === 'connect') renderConnect();
+        else if (tab === 'admin' && isAdmin) renderAdmin();
     }
 
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
-    document.querySelectorAll('.hamburger-item[data-tab]').forEach(item => item.addEventListener('click', () => switchTab(item.dataset.tab)));
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    });
 
-    // Service Worker for offline & install
+    // Service Worker for PWA (fast offline)
     if ('serviceWorker' in navigator) {
-        const swCode = `self.addEventListener('install', e => e.waitUntil(caches.open('do-v5').then(c => c.addAll(['/','/index.html']))));
+        const swCode = `self.addEventListener('install', e => e.waitUntil(caches.open('do-v2').then(c => c.addAll(['/','/index.html']))));
 self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));`;
         const blob = new Blob([swCode], {type: 'application/javascript'});
-        navigator.serviceWorker.register(URL.createObjectURL(blob));
+        const url = URL.createObjectURL(blob);
+        navigator.serviceWorker.register(url);
     }
 </script>
 </body>
