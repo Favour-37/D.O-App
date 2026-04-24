@@ -4,354 +4,276 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#7C4DFF">
-    <title>Dominion Outreach – A Generation of Intimacy</title>
+    <title>Dominion Outreach – Intimacy with the Father</title>
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="https://res.cloudinary.com/dxiefklmt/image/upload/q_auto,f_auto/v1774102552/Dominion_Outreach_ft0cc0.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* ===== DESIGN SYSTEM (matches your website) ===== */
-        :root {
-            --light-bg: #FFFFFF;
-            --light-surface: #F5F5F7;
-            --light-text: #1D1C1E;
-            --light-text-secondary: #86868B;
-            --dark-bg: #000000;
-            --dark-surface: #1C1C1E;
-            --dark-text: #FFFFFF;
-            --dark-text-secondary: #98989D;
-            --primary: #7C4DFF;
-            --primary-dark: #4A1CB9;
-            --secondary: #00C9A7;
-            --gradient-primary: linear-gradient(145deg, #7C4DFF, #B47CFF);
-            --font: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
+        :root {
+            --bg: #FFFFFF;
+            --surface: #F5F5F7;
+            --surface-dark: #E8E8ED;
+            --text: #1D1C1E;
+            --text-secondary: #86868B;
+            --primary: #7C4DFF;
+            --primary-light: #B47CFF;
+            --secondary: #00C9A7;
+            --border: rgba(0,0,0,0.05);
+            --shadow: 0 8px 24px rgba(0,0,0,0.06);
+            --shadow-hover: 0 12px 32px rgba(0,0,0,0.1);
+            --radius: 24px;
+            --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.dark {
+            --bg: #000000;
+            --surface: #1C1C1E;
+            --surface-dark: #2C2C2E;
+            --text: #FFFFFF;
+            --text-secondary: #98989D;
+            --border: rgba(255,255,255,0.08);
+            --shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+
         body {
             font-family: var(--font);
-            background: var(--light-bg);
-            color: var(--light-text);
+            background: var(--bg);
+            color: var(--text);
             transition: background 0.3s, color 0.3s;
+            overflow-x: hidden;
         }
-        body.dark {
-            background: var(--dark-bg);
-            color: var(--dark-text);
-        }
+
         /* Header */
         .app-header {
             position: sticky;
             top: 0;
             background: rgba(255,255,255,0.8);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
             padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
         body.dark .app-header {
             background: rgba(0,0,0,0.8);
-            border-bottom-color: rgba(255,255,255,0.1);
         }
-        .logo {
+        .logo-area {
             display: flex;
             align-items: center;
             gap: 12px;
         }
-        .logo img {
+        .logo-img {
             width: 44px;
             height: 44px;
             border-radius: 12px;
             object-fit: cover;
         }
-        .logo h1 {
-            font-size: 1.2rem;
-            font-weight: 600;
+        .app-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         .theme-toggle {
             background: none;
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: inherit;
+            color: var(--text);
+            transition: var(--transition);
         }
-        /* Navigation tabs */
-        .tabs {
+        .theme-toggle:hover {
+            transform: rotate(15deg);
+        }
+
+        /* Bottom Tab Bar */
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border);
             display: flex;
-            background: rgba(0,0,0,0.05);
-            border-radius: 40px;
-            margin: 16px 20px;
-            padding: 4px;
-        }
-        body.dark .tabs {
-            background: rgba(255,255,255,0.1);
+            justify-content: space-around;
+            padding: 8px 0 20px;
+            z-index: 100;
         }
         .tab-btn {
-            flex: 1;
-            text-align: center;
-            padding: 10px;
+            background: none;
             border: none;
-            background: transparent;
-            border-radius: 40px;
-            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            transition: var(--transition);
             cursor: pointer;
-            transition: all 0.2s;
-            color: inherit;
+            padding: 6px 12px;
+            border-radius: 30px;
+        }
+        .tab-btn i {
+            font-size: 1.4rem;
         }
         .tab-btn.active {
-            background: var(--primary);
-            color: white;
+            color: var(--primary);
+            background: rgba(124,77,255,0.1);
         }
-        /* Panels */
-        .panel {
-            display: none;
-            padding: 0 20px 20px;
-            animation: fadeIn 0.3s ease;
+
+        /* Main content */
+        .main-content {
+            padding: 20px 16px 80px;
+            max-width: 700px;
+            margin: 0 auto;
         }
-        .panel.active {
-            display: block;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+
         /* Cards */
         .card {
-            background: var(--light-surface);
-            border-radius: 24px;
+            background: var(--surface);
+            border-radius: var(--radius);
             padding: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
         }
-        body.dark .card {
-            background: var(--dark-surface);
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
         }
-        .devotional-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        .devotional-date {
-            color: var(--light-text-secondary);
-            font-size: 0.8rem;
-            margin-bottom: 12px;
-        }
-        .devotional-content {
-            line-height: 1.5;
-        }
-        /* Prayer Wall */
-        .prayer-item {
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            padding: 12px 0;
-        }
-        body.dark .prayer-item {
-            border-bottom-color: rgba(255,255,255,0.05);
-        }
-        .prayer-name {
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-        .prayer-text {
-            font-size: 0.95rem;
-            margin-bottom: 6px;
-        }
-        .prayer-meta {
-            font-size: 0.75rem;
-            color: var(--light-text-secondary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .pray-button {
+
+        /* Buttons & inputs */
+        button, .btn {
             background: var(--primary);
-            color: white;
             border: none;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.7rem;
+            border-radius: 40px;
+            padding: 10px 20px;
+            color: white;
+            font-weight: 600;
             cursor: pointer;
-            transition: 0.2s;
+            transition: var(--transition);
         }
-        .pray-button:hover {
-            opacity: 0.8;
-        }
-        form {
-            margin-top: 20px;
+        button:active {
+            transform: scale(0.98);
         }
         input, textarea {
             width: 100%;
             padding: 12px;
             margin-bottom: 12px;
-            border-radius: 12px;
-            border: 1px solid rgba(0,0,0,0.1);
-            background: white;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
             font-family: inherit;
         }
-        body.dark input, body.dark textarea {
-            background: var(--dark-surface);
-            border-color: rgba(255,255,255,0.1);
-            color: white;
+        .post-card {
+            overflow: hidden;
         }
-        button.submit {
-            background: var(--gradient-primary);
-            border: none;
-            padding: 12px;
-            border-radius: 40px;
-            color: white;
-            font-weight: 600;
+        .post-media {
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 12px 0;
+        }
+        .post-media img, .post-media video {
             width: 100%;
-            cursor: pointer;
+            display: block;
         }
-        /* Connect Buttons */
-        .connect-buttons {
+        .post-stats {
             display: flex;
             gap: 16px;
-            justify-content: center;
-            margin: 20px 0;
+            margin-top: 12px;
+            color: var(--text-secondary);
         }
-        .connect-btn {
-            background: rgba(124,77,255,0.1);
-            border-radius: 60px;
-            padding: 12px 24px;
-            text-decoration: none;
-            color: var(--primary);
-            font-weight: 600;
+        .post-stats button {
+            background: none;
+            border: none;
+            color: inherit;
+            padding: 0;
             display: inline-flex;
             align-items: center;
+            gap: 6px;
+        }
+        .comment-section {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+        .comment {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .comment strong {
+            color: var(--primary);
+        }
+        .comment-input {
+            display: flex;
             gap: 8px;
-            transition: 0.2s;
+            margin-top: 12px;
         }
-        .connect-btn:hover {
-            background: var(--primary);
-            color: white;
+        .comment-input input {
+            flex: 1;
+            margin-bottom: 0;
         }
-        /* Notifications */
-        .notification-permission {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .notify-btn {
-            background: var(--secondary);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 40px;
-            cursor: pointer;
-        }
-        footer {
-            text-align: center;
+        .admin-form {
+            background: var(--surface);
             padding: 20px;
-            font-size: 0.8rem;
-            color: var(--light-text-secondary);
-            border-top: 1px solid rgba(0,0,0,0.05);
-            margin-top: 20px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
         }
-        body.dark footer {
-            border-top-color: rgba(255,255,255,0.05);
+        .loader {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
         }
     </style>
 </head>
 <body>
     <div class="app-header">
-        <div class="logo">
-            <img src="https://res.cloudinary.com/dxiefklmt/image/upload/q_auto,f_auto/v1774102552/Dominion_Outreach_ft0cc0.png" alt="Dominion Outreach">
-            <h1>Dominion Outreach</h1>
+        <div class="logo-area">
+            <img src="https://res.cloudinary.com/dxiefklmt/image/upload/q_auto,f_auto/v1774102552/Dominion_Outreach_ft0cc0.png" class="logo-img" alt="Dominion Outreach">
+            <span class="app-title">Dominion Outreach</span>
         </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-            <i class="fas fa-sun"></i>
-            <i class="fas fa-moon" style="display: none;"></i>
-        </button>
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
     </div>
 
-    <div class="tabs">
-        <button class="tab-btn active" data-tab="home">Home</button>
-        <button class="tab-btn" data-tab="daily">Daily</button>
-        <button class="tab-btn" data-tab="prayer">Prayer Wall</button>
-        <button class="tab-btn" data-tab="connect">Connect</button>
+    <div class="main-content" id="mainContent">
+        <!-- Dynamic content injected by JS -->
+        <div class="loader">Loading...</div>
     </div>
 
-    <!-- Home Panel -->
-    <div class="panel active" id="home-panel">
-        <div class="card">
-            <h2>Welcome to Dominion Outreach</h2>
-            <p>Raising a Generation of Intimacy with the Father.</p>
-            <p style="margin-top: 12px;">"And this is life eternal, that they might know thee the only true God, and Jesus Christ, whom thou hast sent." — John 17:3</p>
-        </div>
-        <div class="card">
-            <h3>Today's Verse</h3>
-            <p style="font-style: italic; margin-top: 8px;">"Draw near to God, and he will draw near to you." — James 4:8</p>
-        </div>
+    <div class="tab-bar">
+        <button class="tab-btn active" data-tab="home"><i class="fas fa-home"></i><span>Home</span></button>
+        <button class="tab-btn" data-tab="feed"><i class="fas fa-newspaper"></i><span>Feed</span></button>
+        <button class="tab-btn" data-tab="prayer"><i class="fas fa-hands-praying"></i><span>Prayer</span></button>
+        <button class="tab-btn" data-tab="journal"><i class="fas fa-book"></i><span>Journal</span></button>
+        <button class="tab-btn" data-tab="settings"><i class="fas fa-cog"></i><span>Settings</span></button>
     </div>
-
-    <!-- Daily Devotional Panel -->
-    <div class="panel" id="daily-panel">
-        <div class="card" id="devotional-container">
-            <!-- Loaded via JS -->
-            <div class="devotional-title">Loading...</div>
-        </div>
-    </div>
-
-    <!-- Prayer Wall Panel -->
-    <div class="panel" id="prayer-panel">
-        <div class="card">
-            <h3>Prayer Requests</h3>
-            <div id="prayer-list"></div>
-            <form id="prayer-form">
-                <input type="text" id="prayer-name" placeholder="Your name (optional)" autocomplete="off">
-                <textarea id="prayer-request" rows="3" placeholder="Share your prayer request..."></textarea>
-                <button type="submit" class="submit">Submit Prayer Request</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Connect Panel -->
-    <div class="panel" id="connect-panel">
-        <div class="card">
-            <h3>Join Our Community</h3>
-            <div class="connect-buttons">
-                <a href="https://whatsapp.com/channel/0029Vb7dH5k0wajp7QiO6A2m" target="_blank" class="connect-btn">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
-                </a>
-                <a href="https://www.instagram.com/dominion_outreach/?hl=en" target="_blank" class="connect-btn">
-                    <i class="fab fa-instagram"></i> Instagram
-                </a>
-                <a href="mailto:dominionoutreachofficial@gmail.com" class="connect-btn">
-                    <i class="fas fa-envelope"></i> Email
-                </a>
-            </div>
-            <div class="notification-permission">
-                <p>Get daily devotionals via notifications</p>
-                <button id="request-notify" class="notify-btn">Enable Notifications</button>
-            </div>
-            <p style="margin-top: 20px; text-align: center;">We'd love to hear from you! Reach out anytime.</p>
-        </div>
-    </div>
-
-    <footer>
-        <p>© 2026 Dominion Outreach. All rights reserved.</p>
-        <p>Made with <i class="fas fa-heart"></i> for His glory</p>
-    </footer>
 
     <script>
+        // ---------- Cloudinary config ----------
+        const CLOUD_NAME = "dxiefklmt";          // your cloud name
+        const UPLOAD_PRESET = "dominion_app";    // unsigned upload preset – create in Cloudinary dashboard
+
         // ---------- Theme ----------
         const themeToggle = document.getElementById('themeToggle');
-        const sunIcon = themeToggle.querySelector('.fa-sun');
-        const moonIcon = themeToggle.querySelector('.fa-moon');
         function setTheme(theme) {
-            if (theme === 'dark') {
-                document.body.classList.add('dark');
-                sunIcon.style.display = 'none';
-                moonIcon.style.display = 'inline-block';
-            } else {
-                document.body.classList.remove('dark');
-                sunIcon.style.display = 'inline-block';
-                moonIcon.style.display = 'none';
-            }
+            if (theme === 'dark') document.body.classList.add('dark');
+            else document.body.classList.remove('dark');
             localStorage.setItem('theme', theme);
+            const icon = themeToggle.querySelector('i');
+            icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
         }
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') setTheme('dark');
@@ -361,154 +283,398 @@
             setTheme(isDark ? 'light' : 'dark');
         });
 
-        // ---------- Tab Navigation ----------
-        const tabs = document.querySelectorAll('.tab-btn');
-        const panels = document.querySelectorAll('.panel');
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const target = tab.getAttribute('data-tab');
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                panels.forEach(panel => panel.classList.remove('active'));
-                document.getElementById(`${target}-panel`).classList.add('active');
-            });
-        });
+        // ---------- Data models (localStorage keys) ----------
+        const STORAGE = {
+            posts: 'dominion_posts',
+            prayers: 'dominion_prayers',
+            journal: 'dominion_journal',
+            dailyRotation: 'dominion_daily_index'
+        };
 
-        // ---------- Daily Devotionals (sample – you can replace with your own) ----------
-        const devotionals = [
-            { title: "Walking in Intimacy", date: "March 31, 2026", content: "Intimacy with God is not a destination; it’s a journey of daily surrender. When we draw near, He draws near. Today, spend time in His presence and let His love transform you." },
-            { title: "The Power of Partnership", date: "March 30, 2026", content: "You were never meant to walk alone. God places us in community to encourage, uplift, and sharpen one another. Reach out to a brother or sister today." },
-            { title: "Living as a New Creation", date: "March 29, 2026", content: "In Christ, old things have passed away. Embrace your identity as a child of God and walk in the freedom He has given you." }
+        // Example daily scriptures (you can edit/add more)
+        const dailyVerses = [
+            { verse: "Jeremiah 29:11", text: "'For I know the plans I have for you,' declares the LORD, 'plans to prosper you and not to harm you, plans to give you hope and a future.'" },
+            { verse: "Philippians 4:13", text: "I can do all things through Christ who strengthens me." },
+            { verse: "Isaiah 40:31", text: "But those who hope in the LORD will renew their strength. They will soar on wings like eagles." },
+            { verse: "Romans 8:28", text: "And we know that in all things God works for the good of those who love him, who have been called according to his purpose." },
+            { verse: "Psalm 23:4", text: "Even though I walk through the darkest valley, I will fear no evil, for you are with me." }
         ];
-        function loadDevotional() {
-            const today = new Date().toISOString().slice(0,10);
-            // For demo, just show the first one; you can rotate based on date.
-            const dev = devotionals[0];
-            document.getElementById('devotional-container').innerHTML = `
-                <div class="devotional-title">${dev.title}</div>
-                <div class="devotional-date">${dev.date}</div>
-                <div class="devotional-content">${dev.content}</div>
-            `;
-        }
-        loadDevotional();
 
-        // ---------- Prayer Wall (localStorage) ----------
-        let prayers = JSON.parse(localStorage.getItem('prayers') || '[]');
-        function renderPrayers() {
-            const container = document.getElementById('prayer-list');
-            if (!container) return;
-            if (prayers.length === 0) {
-                container.innerHTML = '<p>No prayer requests yet. Be the first to share.</p>';
-                return;
+        function getDailyVerse() {
+            let index = parseInt(localStorage.getItem(STORAGE.dailyRotation) || '0');
+            const verse = dailyVerses[index % dailyVerses.length];
+            localStorage.setItem(STORAGE.dailyRotation, (index + 1) % dailyVerses.length);
+            return verse;
+        }
+
+        // Initialize default posts if empty
+        function initData() {
+            if (!localStorage.getItem(STORAGE.posts)) {
+                const defaultPost = {
+                    id: Date.now(),
+                    title: "Welcome to Dominion Outreach",
+                    content: "This is a place of intimacy with the Father. Share your journey, grow in faith, and encourage one another.",
+                    mediaUrl: null,
+                    mediaType: null,
+                    timestamp: new Date().toISOString(),
+                    likes: 0,
+                    comments: []
+                };
+                localStorage.setItem(STORAGE.posts, JSON.stringify([defaultPost]));
             }
-            container.innerHTML = prayers.map((p, idx) => `
-                <div class="prayer-item">
-                    <div class="prayer-name">${escapeHtml(p.name) || 'Anonymous'}</div>
-                    <div class="prayer-text">${escapeHtml(p.text)}</div>
-                    <div class="prayer-meta">
-                        <span>${p.date}</span>
-                        <button class="pray-button" data-idx="${idx}">Prayed (${p.prayCount || 0})</button>
-                    </div>
+            if (!localStorage.getItem(STORAGE.prayers)) {
+                localStorage.setItem(STORAGE.prayers, JSON.stringify([]));
+            }
+            if (!localStorage.getItem(STORAGE.journal)) {
+                localStorage.setItem(STORAGE.journal, JSON.stringify([]));
+            }
+        }
+        initData();
+
+        function getPosts() { return JSON.parse(localStorage.getItem(STORAGE.posts)); }
+        function savePosts(posts) { localStorage.setItem(STORAGE.posts, JSON.stringify(posts)); }
+        function getPrayers() { return JSON.parse(localStorage.getItem(STORAGE.prayers)); }
+        function savePrayers(prayers) { localStorage.setItem(STORAGE.prayers, JSON.stringify(prayers)); }
+        function getJournal() { return JSON.parse(localStorage.getItem(STORAGE.journal)); }
+        function saveJournal(entries) { localStorage.setItem(STORAGE.journal, JSON.stringify(entries)); }
+
+        // Helper: escape HTML
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+
+        // ---------- Tab Rendering ----------
+        let activeTab = 'home';
+
+        function renderHome() {
+            const verse = getDailyVerse();
+            const html = `
+                <div class="card">
+                    <h3>🌿 Daily Verse</h3>
+                    <p style="font-style: italic; margin: 12px 0;">“${escapeHtml(verse.text)}”</p>
+                    <p style="text-align: right;">— ${escapeHtml(verse.verse)}</p>
                 </div>
-            `).join('');
-            // Attach pray button events
-            document.querySelectorAll('.pray-button').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const idx = parseInt(btn.dataset.idx);
-                    prayers[idx].prayCount = (prayers[idx].prayCount || 0) + 1;
-                    localStorage.setItem('prayers', JSON.stringify(prayers));
-                    renderPrayers();
-                });
-            });
+                <div class="card">
+                    <h3>🙏 Word of Encouragement</h3>
+                    <p>Let your faith be bigger than your fears. God is with you every step of the way.</p>
+                </div>
+                <div class="card">
+                    <h3>🎧 Today's Worship</h3>
+                    <p><i class="fas fa-music"></i> “Way Maker” – Sinach</p>
+                    <p><i class="fab fa-youtube"></i> <a href="#" style="color: var(--primary);">Listen on YouTube</a></p>
+                </div>
+            `;
+            document.getElementById('mainContent').innerHTML = html;
         }
-        function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
-        document.getElementById('prayer-form')?.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('prayer-name').value.trim();
-            const text = document.getElementById('prayer-request').value.trim();
-            if (!text) return;
-            prayers.unshift({
-                name: name || 'Anonymous',
-                text: text,
-                date: new Date().toLocaleDateString(),
-                prayCount: 0
-            });
-            localStorage.setItem('prayers', JSON.stringify(prayers));
-            document.getElementById('prayer-name').value = '';
-            document.getElementById('prayer-request').value = '';
-            renderPrayers();
-        });
-        renderPrayers();
 
-        // ---------- Notifications (browser) ----------
-        const notifyBtn = document.getElementById('request-notify');
-        async function requestNotificationPermission() {
-            if (!('Notification' in window)) {
-                alert('This browser does not support notifications');
-                return;
-            }
-            const permission = await Notification.requestPermission();
-            if (permission === 'granted') {
-                // Send a test notification
-                new Notification('Dominion Outreach', {
-                    body: 'You will now receive daily devotionals and prayer updates!',
-                    icon: 'https://res.cloudinary.com/dxiefklmt/image/upload/q_auto,f_auto/v1774102552/Dominion_Outreach_ft0cc0.png'
-                });
-                // Optionally schedule a daily reminder (simulated)
-                setInterval(() => {
-                    // In real app, you'd check for new content; here just a demo
-                    if (Notification.permission === 'granted') {
-                        new Notification('Daily Devotional', {
-                            body: 'New devotion available: "Walking in Intimacy"',
-                            icon: 'https://res.cloudinary.com/dxiefklmt/image/upload/q_auto,f_auto/v1774102552/Dominion_Outreach_ft0cc0.png'
-                        });
-                    }
-                }, 24 * 60 * 60 * 1000); // once a day (simulated)
-                alert('Notifications enabled! You will receive daily updates.');
+        // Feed: list posts, add new post form, like/comment functionality
+        function renderFeed() {
+            const posts = getPosts();
+            let html = `
+                <div class="admin-form">
+                    <h3>✍️ Share a New Devotional</h3>
+                    <input type="text" id="newPostTitle" placeholder="Title">
+                    <textarea id="newPostContent" rows="4" placeholder="Scripture / Reflection"></textarea>
+                    <input type="file" id="newPostMedia" accept="image/*,video/*">
+                    <button id="publishPostBtn">Publish Post</button>
+                    <div id="uploadStatus" style="margin-top: 8px; font-size: 0.8rem;"></div>
+                </div>
+                <div id="postsList"></div>
+            `;
+            document.getElementById('mainContent').innerHTML = html;
+
+            const postsDiv = document.getElementById('postsList');
+            if (posts.length === 0) {
+                postsDiv.innerHTML = '<div class="card">No posts yet. Create the first one!</div>';
             } else {
-                alert('Please allow notifications to receive updates.');
+                let postsHtml = '';
+                posts.forEach(post => {
+                    const mediaHtml = post.mediaUrl ? 
+                        (post.mediaType === 'image' ? `<div class="post-media"><img src="${post.mediaUrl}" alt="post image" loading="lazy"></div>` :
+                        `<div class="post-media"><video controls src="${post.mediaUrl}"></video></div>`) : '';
+                    const commentsHtml = (post.comments || []).map(c => `
+                        <div class="comment"><strong>${escapeHtml(c.name)}</strong>: ${escapeHtml(c.text)}</div>
+                    `).join('');
+                    postsHtml += `
+                        <div class="card post-card" data-id="${post.id}">
+                            <h3>${escapeHtml(post.title)}</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.75rem;">${new Date(post.timestamp).toLocaleDateString()}</p>
+                            <div class="post-content">${escapeHtml(post.content)}</div>
+                            ${mediaHtml}
+                            <div class="post-stats">
+                                <button class="like-post" data-id="${post.id}"><i class="far fa-heart"></i> ${post.likes}</button>
+                                <button class="toggle-comments" data-id="${post.id}"><i class="far fa-comment"></i> ${(post.comments || []).length}</button>
+                            </div>
+                            <div class="comment-section hidden" id="comments-${post.id}">
+                                <div class="comments-list">${commentsHtml}</div>
+                                <div class="comment-input">
+                                    <input type="text" placeholder="Write a comment..." id="commentInput-${post.id}">
+                                    <button class="submit-comment" data-id="${post.id}">Post</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                postsDiv.innerHTML = postsHtml;
             }
-        }
-        notifyBtn?.addEventListener('click', requestNotificationPermission);
 
-        // ---------- Service Worker (for PWA offline & install) ----------
+            // New post with Cloudinary upload
+            document.getElementById('publishPostBtn')?.addEventListener('click', async () => {
+                const title = document.getElementById('newPostTitle').value.trim();
+                const content = document.getElementById('newPostContent').value.trim();
+                if (!title || !content) { alert('Please fill title and content'); return; }
+                const file = document.getElementById('newPostMedia').files[0];
+                let mediaUrl = null, mediaType = null;
+                const statusDiv = document.getElementById('uploadStatus');
+                if (file) {
+                    statusDiv.innerText = 'Uploading media...';
+                    const formData = new FormData();
+                    formData.append('file', file);
+                    formData.append('upload_preset', UPLOAD_PRESET);
+                    try {
+                        const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`, { method: 'POST', body: formData });
+                        const data = await res.json();
+                        mediaUrl = data.secure_url;
+                        mediaType = file.type.startsWith('image/') ? 'image' : 'video';
+                        statusDiv.innerText = 'Upload complete!';
+                    } catch (err) {
+                        statusDiv.innerText = 'Upload failed, media not attached';
+                        console.error(err);
+                    }
+                }
+                const posts = getPosts();
+                const newPost = {
+                    id: Date.now(),
+                    title,
+                    content,
+                    mediaUrl,
+                    mediaType,
+                    timestamp: new Date().toISOString(),
+                    likes: 0,
+                    comments: []
+                };
+                posts.unshift(newPost);
+                savePosts(posts);
+                renderFeed();
+            });
+
+            // Like / Comment event delegation
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.like-post')) {
+                    const btn = e.target.closest('.like-post');
+                    const id = parseInt(btn.dataset.id);
+                    const posts = getPosts();
+                    const post = posts.find(p => p.id === id);
+                    if (post) {
+                        post.likes = (post.likes || 0) + 1;
+                        savePosts(posts);
+                        renderFeed();
+                    }
+                }
+                if (e.target.closest('.toggle-comments')) {
+                    const btn = e.target.closest('.toggle-comments');
+                    const id = btn.dataset.id;
+                    const sec = document.getElementById(`comments-${id}`);
+                    sec.classList.toggle('hidden');
+                }
+                if (e.target.closest('.submit-comment')) {
+                    const btn = e.target.closest('.submit-comment');
+                    const id = parseInt(btn.dataset.id);
+                    const input = document.getElementById(`commentInput-${id}`);
+                    const text = input.value.trim();
+                    if (!text) return;
+                    const name = "You"; // local user, no login
+                    const posts = getPosts();
+                    const post = posts.find(p => p.id === id);
+                    if (post) {
+                        post.comments = post.comments || [];
+                        post.comments.push({ id: Date.now(), name, text, timestamp: new Date().toISOString() });
+                        savePosts(posts);
+                        renderFeed();
+                    }
+                }
+            });
+        }
+
+        // Prayer Wall
+        function renderPrayerWall() {
+            const prayers = getPrayers();
+            let html = `
+                <div class="card">
+                    <h3>🕯️ Submit a Prayer Request</h3>
+                    <input type="text" id="prayerName" placeholder="Your name (optional)">
+                    <textarea id="prayerText" rows="3" placeholder="What can we pray about?"></textarea>
+                    <button id="submitPrayerBtn">Submit</button>
+                </div>
+                <div id="prayersList"></div>
+            `;
+            document.getElementById('mainContent').innerHTML = html;
+            const listDiv = document.getElementById('prayersList');
+            if (prayers.length === 0) {
+                listDiv.innerHTML = '<div class="card">No prayer requests yet. Be the first to share.</div>';
+            } else {
+                let prayersHtml = '';
+                prayers.forEach(p => {
+                    prayersHtml += `
+                        <div class="card">
+                            <div><strong>${escapeHtml(p.name) || 'Anonymous'}</strong></div>
+                            <p>${escapeHtml(p.text)}</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+                                <span style="font-size: 0.75rem;">${new Date(p.timestamp).toLocaleDateString()}</span>
+                                <button class="pray-for" data-id="${p.id}">🙏 Prayed (${p.prayCount || 0})</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                listDiv.innerHTML = prayersHtml;
+            }
+
+            document.getElementById('submitPrayerBtn')?.addEventListener('click', () => {
+                const name = document.getElementById('prayerName').value.trim();
+                const text = document.getElementById('prayerText').value.trim();
+                if (!text) return;
+                const prayers = getPrayers();
+                prayers.unshift({
+                    id: Date.now(),
+                    name: name || 'Anonymous',
+                    text,
+                    timestamp: new Date().toISOString(),
+                    prayCount: 0
+                });
+                savePrayers(prayers);
+                renderPrayerWall();
+            });
+
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.pray-for')) {
+                    const btn = e.target.closest('.pray-for');
+                    const id = parseInt(btn.dataset.id);
+                    const prayers = getPrayers();
+                    const prayer = prayers.find(p => p.id === id);
+                    if (prayer) {
+                        prayer.prayCount = (prayer.prayCount || 0) + 1;
+                        savePrayers(prayers);
+                        renderPrayerWall();
+                    }
+                }
+            });
+        }
+
+        // Journal
+        function renderJournal() {
+            let entries = getJournal();
+            let html = `
+                <div class="admin-form">
+                    <h3>📔 Write in Your Journal</h3>
+                    <input type="text" id="journalTitle" placeholder="Title">
+                    <textarea id="journalContent" rows="4" placeholder="Your thoughts, prayers, reflections..."></textarea>
+                    <button id="addJournalEntry">Save Entry</button>
+                </div>
+                <div id="journalList"></div>
+            `;
+            document.getElementById('mainContent').innerHTML = html;
+            const listDiv = document.getElementById('journalList');
+            if (entries.length === 0) {
+                listDiv.innerHTML = '<div class="card">No journal entries yet. Write your first one!</div>';
+            } else {
+                let entriesHtml = '';
+                entries.slice().reverse().forEach(entry => {
+                    entriesHtml += `
+                        <div class="card">
+                            <h3>${escapeHtml(entry.title)}</h3>
+                            <p style="font-size: 0.75rem; color: var(--text-secondary);">${new Date(entry.timestamp).toLocaleString()}</p>
+                            <p>${escapeHtml(entry.content)}</p>
+                            <button class="delete-journal" data-id="${entry.id}" style="margin-top: 8px; background: none; color: var(--text-secondary); padding: 4px 12px;">Delete</button>
+                        </div>
+                    `;
+                });
+                listDiv.innerHTML = entriesHtml;
+            }
+
+            document.getElementById('addJournalEntry')?.addEventListener('click', () => {
+                const title = document.getElementById('journalTitle').value.trim();
+                const content = document.getElementById('journalContent').value.trim();
+                if (!title || !content) return alert('Please fill both title and content');
+                const entries = getJournal();
+                entries.push({
+                    id: Date.now(),
+                    title,
+                    content,
+                    timestamp: new Date().toISOString()
+                });
+                saveJournal(entries);
+                renderJournal();
+            });
+
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.delete-journal')) {
+                    const id = parseInt(e.target.closest('.delete-journal').dataset.id);
+                    let entries = getJournal();
+                    entries = entries.filter(e => e.id !== id);
+                    saveJournal(entries);
+                    renderJournal();
+                }
+            });
+        }
+
+        // Settings
+        function renderSettings() {
+            const html = `
+                <div class="card">
+                    <h3>⚙️ App Settings</h3>
+                    <button id="clearAllData" style="background: #FF3B30; margin-top: 16px;">Clear All Local Data</button>
+                    <p style="margin-top: 12px; font-size: 0.8rem;">This will delete all posts, prayers, and journal entries.</p>
+                </div>
+                <div class="card">
+                    <h3>📲 Install App</h3>
+                    <p>On supported browsers, click “Add to Home Screen” from the share menu.</p>
+                </div>
+            `;
+            document.getElementById('mainContent').innerHTML = html;
+            document.getElementById('clearAllData')?.addEventListener('click', () => {
+                if (confirm('WARNING: This will delete ALL your data. Are you sure?')) {
+                    localStorage.clear();
+                    initData();
+                    alert('All data cleared. App will reload.');
+                    window.location.reload();
+                }
+            });
+        }
+
+        // Tab switching
+        function switchTab(tab) {
+            activeTab = tab;
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add('active');
+            if (tab === 'home') renderHome();
+            else if (tab === 'feed') renderFeed();
+            else if (tab === 'prayer') renderPrayerWall();
+            else if (tab === 'journal') renderJournal();
+            else if (tab === 'settings') renderSettings();
+        }
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+        });
+
+        // initial load
+        switchTab('home');
+
+        // Service Worker for offline caching (make app installable)
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js').then(reg => {
-                console.log('Service Worker registered', reg);
-            }).catch(err => console.log('SW registration failed', err));
-        }
-    </script>
-
-    <script>
-        // The service worker code will be in a separate file (sw.js)
-        // For this demo, we embed it dynamically
-        if (!document.querySelector('#sw-script')) {
-            const swCode = `
-self.addEventListener('install', event => {
-    event.waitUntil(
-        caches.open('dominion-cache-v1').then(cache => {
-            return cache.addAll([
-                '/',
-                '/index.html',
-                'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
-                'https://res.cloudinary.com/dxiefklmt/image/upload/q_auto,f_auto/v1774102552/Dominion_Outreach_ft0cc0.png'
-            ]);
-        })
-    );
-});
-self.addEventListener('fetch', event => {
-    event.respondWith(
-        caches.match(event.request).then(response => {
-            return response || fetch(event.request);
-        })
-    );
-});
-`;
+            navigator.serviceWorker.register('/sw.js').catch(err => console.warn('SW registration failed', err));
+            // dynamic service worker creation if not exists
+            const swCode = `self.addEventListener('install', e => e.waitUntil(caches.open('do-v1').then(c => c.addAll(['/','/index.html']))));
+self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));`;
             const blob = new Blob([swCode], {type: 'application/javascript'});
             const url = URL.createObjectURL(blob);
-            navigator.serviceWorker.register(url).then(reg => {
-                console.log('Embedded SW registered');
-            });
+            navigator.serviceWorker.register(url);
         }
     </script>
 </body>
