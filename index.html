@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#7C4DFF">
+    <meta name="theme-color" content="#000000">
     <title>Dominion Outreach – The Ultimate App</title>
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="https://res.cloudinary.com/dxiefklmt/image/upload/q_auto,f_auto/v1774102552/Dominion_Outreach_ft0cc0.png">
@@ -15,41 +15,32 @@
             box-sizing: border-box;
         }
         :root {
-            --bg: #FFFFFF;
-            --surface: #F5F5F7;
-            --bg-dark: #000000;
-            --surface-dark: #1C1C1E;
-            --text: #1D1C1E;
-            --text-secondary: #86868B;
-            --primary: #7C4DFF;
-            --primary-light: #B47CFF;
-            --secondary: #00C9A7;
-            --accent: #FF6B6B;
-            --border: rgba(0,0,0,0.05);
-            --shadow: 0 8px 24px rgba(0,0,0,0.06);
-            --shadow-hover: 0 12px 32px rgba(0,0,0,0.1);
-            --radius: 24px;
-            --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
-        body.dark {
             --bg: #000000;
             --surface: #1C1C1E;
+            --surface-light: #2C2C2E;
             --text: #FFFFFF;
             --text-secondary: #98989D;
+            --primary: #7C4DFF;
+            --primary-dark: #4A1CB9;
+            --secondary: #00C9A7;
+            --accent: #FF6B6B;
             --border: rgba(255,255,255,0.08);
             --shadow: 0 8px 24px rgba(0,0,0,0.3);
+            --shadow-hover: 0 12px 32px rgba(0,0,0,0.4);
+            --radius: 24px;
+            --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
         body {
             font-family: var(--font);
             background: var(--bg);
             color: var(--text);
-            transition: background 0.3s, color 0.3s;
             overflow-x: hidden;
         }
+        /* Header */
         .app-header {
             position: sticky;
             top: 0;
-            background: rgba(255,255,255,0.8);
+            background: rgba(0,0,0,0.8);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
             padding: 12px 20px;
@@ -57,9 +48,6 @@
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-        }
-        body.dark .app-header {
-            background: rgba(0,0,0,0.8);
         }
         .logo-area {
             display: flex;
@@ -80,19 +68,21 @@
             background-clip: text;
             color: transparent;
         }
-        .theme-toggle {
+        .logout-btn {
             background: none;
             border: none;
-            font-size: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
             cursor: pointer;
-            color: var(--text);
         }
+        /* Login Screen */
         .login-screen {
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
             padding: 20px;
+            background: var(--bg);
         }
         .login-card {
             background: var(--surface);
@@ -129,13 +119,14 @@
             padding: 14px;
             border-radius: 30px;
             border: 1px solid var(--border);
-            background: var(--bg);
+            background: var(--surface-light);
             color: var(--text);
             margin-bottom: 16px;
         }
         .hidden {
             display: none;
         }
+        /* Tab Bar */
         .tab-bar {
             position: fixed;
             bottom: 0;
@@ -175,6 +166,7 @@
             max-width: 700px;
             margin: 0 auto;
         }
+        /* Cards */
         .card {
             background: var(--surface);
             border-radius: var(--radius);
@@ -187,46 +179,6 @@
             transform: translateY(-2px);
             box-shadow: var(--shadow-hover);
         }
-        .post-media {
-            border-radius: 16px;
-            overflow: hidden;
-            margin: 12px 0;
-        }
-        .post-media img, .post-media video {
-            width: 100%;
-        }
-        .post-stats {
-            display: flex;
-            gap: 16px;
-            margin-top: 12px;
-            color: var(--text-secondary);
-        }
-        .post-stats button {
-            background: none;
-            border: none;
-            color: inherit;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            cursor: pointer;
-        }
-        .comment-section {
-            margin-top: 12px;
-            border-top: 1px solid var(--border);
-            padding-top: 12px;
-        }
-        .comment-input {
-            display: flex;
-            gap: 8px;
-            margin-top: 12px;
-        }
-        .comment-input input {
-            flex: 1;
-            padding: 8px 12px;
-            border-radius: 30px;
-            border: 1px solid var(--border);
-            background: var(--bg);
-        }
         button {
             background: var(--primary);
             border: none;
@@ -235,16 +187,41 @@
             color: white;
             font-weight: 600;
             cursor: pointer;
+            transition: 0.2s;
         }
         input, textarea {
             width: 100%;
             padding: 12px;
-            margin-bottom: 12px;
             border-radius: 16px;
             border: 1px solid var(--border);
-            background: var(--bg);
+            background: var(--surface-light);
             color: var(--text);
             font-family: inherit;
+            margin-bottom: 12px;
+        }
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--surface-light);
+            color: var(--text);
+            padding: 12px 24px;
+            border-radius: 60px;
+            z-index: 200;
+            animation: fadeUp 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+        .reply-box {
+            background: var(--surface-light);
+            padding: 12px;
+            border-radius: 16px;
+            margin-top: 8px;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -258,25 +235,25 @@
         <p style="margin-bottom: 24px;">Raising a Generation of Intimacy</p>
         <div class="login-buttons">
             <button id="adminLoginBtn" class="login-btn">👑 Admin Login</button>
-            <button id="memberJoinBtn" class="login-btn secondary">Login</button>
+            <button id="memberJoinBtn" class="login-btn secondary">🙏 Join as Disciple</button>
         </div>
         <div id="adminLoginForm" class="hidden" style="margin-top: 24px;">
             <input type="email" id="adminEmail" placeholder="Email" class="login-input">
             <input type="password" id="adminPassword" placeholder="Password" class="login-input">
             <button id="submitAdminLogin">Sign in</button>
-            <div id="loginError" style="color: red; margin-top: 12px;"></div>
+            <div id="loginError" style="color: #FF6B6B; margin-top: 12px;"></div>
         </div>
     </div>
 </div>
 
-<!-- Main App (hidden until login) -->
+<!-- Main App -->
 <div id="appContainer" class="hidden">
     <div class="app-header">
         <div class="logo-area">
             <img src="https://res.cloudinary.com/dxiefklmt/image/upload/q_auto,f_auto/v1774102552/Dominion_Outreach_ft0cc0.png" class="logo-img">
             <span class="app-title">Dominion Outreach</span>
         </div>
-        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+        <button id="logoutBtn" class="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
     </div>
 
     <div class="main-content" id="mainContent"></div>
@@ -286,6 +263,7 @@
         <button class="tab-btn" data-tab="feed"><i class="fas fa-newspaper"></i><span>Feed</span></button>
         <button class="tab-btn" data-tab="prayer"><i class="fas fa-hands-praying"></i><span>Prayer</span></button>
         <button class="tab-btn" data-tab="journal"><i class="fas fa-book"></i><span>Journal</span></button>
+        <button class="tab-btn" data-tab="connect"><i class="fas fa-link"></i><span>Connect</span></button>
         <button id="adminTabBtn" class="tab-btn" style="display: none;" data-tab="admin"><i class="fas fa-user-shield"></i><span>Admin</span></button>
     </div>
 </div>
@@ -294,27 +272,22 @@
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging-compat.js"></script>
 
 <script>
-    // -------------------- FIREBASE CONFIG (REPLACE WITH YOUR OWN) --------------------
+    // ========== FIREBASE CONFIG (REPLACE WITH YOUR OWN) ==========
     const firebaseConfig = {
-  apiKey: "AIzaSyD-IECvQ8eJ2NVgvV8vO6KkpTDmyPHd2MQ",
-  authDomain: "dominion-outreach.firebaseapp.com",
-  projectId: "dominion-outreach",
-  storageBucket: "dominion-outreach.firebasestorage.app",
-  messagingSenderId: "378482519812",
-  appId: "1:378482519812:web:cb6200a73f8cefa7882a51",
-  measurementId: "G-V8N77QSRYG"
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_AUTH_DOMAIN",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_STORAGE_BUCKET",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId: "YOUR_APP_ID"
     };
-    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
-    const messaging = firebase.messaging();
 
-    // Cloudinary (unsigned upload preset for admin posts)
+    // Cloudinary (same as before)
     const CLOUD_NAME = "dxiefklmt";
     const UPLOAD_PRESET = "dominion_app";
 
@@ -322,32 +295,18 @@
     let currentUser = null;
     let isAdmin = false;
     let currentTab = 'home';
-    let postsUnsub = null;
-    let prayersUnsub = null;
+    let userDoc = null; // stores user's name, email, etc.
 
-    // DOM elements
-    const loginScreen = document.getElementById('loginScreen');
-    const appContainer = document.getElementById('appContainer');
-    const adminLoginForm = document.getElementById('adminLoginForm');
-    const adminLoginBtn = document.getElementById('adminLoginBtn');
-    const memberJoinBtn = document.getElementById('memberJoinBtn');
-    const submitAdminLogin = document.getElementById('submitAdminLogin');
-    const adminTabBtn = document.getElementById('adminTabBtn');
-    const themeToggle = document.getElementById('themeToggle');
-
-    // -------------------- Helper Functions --------------------
-    function setTheme(theme) {
-        if (theme === 'dark') document.body.classList.add('dark');
-        else document.body.classList.remove('dark');
-        localStorage.setItem('theme', theme);
-        themeToggle.querySelector('i').className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    // Helper: show toast message
+    function showToast(msg) {
+        let toast = document.querySelector('.toast');
+        if (toast) toast.remove();
+        toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerText = msg;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
     }
-    const savedTheme = localStorage.getItem('theme');
-    setTheme(savedTheme === 'dark' ? 'dark' : 'light');
-    themeToggle.addEventListener('click', () => {
-        const isDark = document.body.classList.contains('dark');
-        setTheme(isDark ? 'light' : 'dark');
-    });
 
     // Escape HTML
     function escapeHtml(str) {
@@ -360,26 +319,33 @@
         });
     }
 
-    // -------------------- Authentication --------------------
-    adminLoginBtn.addEventListener('click', () => {
-        adminLoginForm.classList.toggle('hidden');
-    });
-
-    memberJoinBtn.addEventListener('click', async () => {
-        // Create anonymous user with a random email (so they can have a UID)
-        const randomEmail = `user_${Date.now()}@dominion.local`;
+    // ========== AUTH ==========
+    document.getElementById('adminLoginBtn').onclick = () => {
+        document.getElementById('adminLoginForm').classList.toggle('hidden');
+    };
+    document.getElementById('memberJoinBtn').onclick = async () => {
+        // Show prompt for name and email
+        const name = prompt("Enter your name (e.g., John Mwangi):");
+        if (!name) return;
+        const email = prompt("Enter your email address:");
+        if (!email) return;
+        // Create a random password and auto-signup
         const randomPassword = Math.random().toString(36).slice(-10);
         try {
-            const cred = await auth.createUserWithEmailAndPassword(randomEmail, randomPassword);
-            // Also store a custom claim or Firestore doc to mark as member (optional)
-            await db.collection('users').doc(cred.user.uid).set({ role: 'member', email: randomEmail });
-            alert('Welcome, Disciple! You are now part of the community.');
+            const cred = await auth.createUserWithEmailAndPassword(email, randomPassword);
+            // Save name and email in Firestore
+            await db.collection('users').doc(cred.user.uid).set({
+                name: name,
+                email: email,
+                role: 'member',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            showToast(`Welcome, ${name}! You are now part of the community.`);
         } catch (err) {
-            alert('Error: ' + err.message);
+            alert("Error: " + err.message);
         }
-    });
-
-    submitAdminLogin.addEventListener('click', async () => {
+    };
+    document.getElementById('submitAdminLogin').onclick = async () => {
         const email = document.getElementById('adminEmail').value;
         const pwd = document.getElementById('adminPassword').value;
         try {
@@ -387,36 +353,44 @@
         } catch (err) {
             document.getElementById('loginError').innerText = err.message;
         }
-    });
+    };
+    document.getElementById('logoutBtn').onclick = async () => {
+        await auth.signOut();
+    };
 
     auth.onAuthStateChanged(async (user) => {
         if (user) {
             currentUser = user;
-            // Check if admin (emails match)
+            // Get user doc
+            const doc = await db.collection('users').doc(user.uid).get();
+            userDoc = doc.data();
             const adminEmails = ['favourbaraka1@gmail.com', 'barakafavor37@gmail.com'];
             isAdmin = adminEmails.includes(user.email);
-            // Hide login screen, show app
-            loginScreen.style.display = 'none';
-            appContainer.classList.remove('hidden');
-            // Show/hide admin tab
-            adminTabBtn.style.display = isAdmin ? 'flex' : 'none';
-            // Load home tab by default
-            switchTab('home');
-            // Start realtime listeners
-            startListeners();
-            // Request notification permission for members (optional)
-            if (!isAdmin && 'Notification' in window) {
-                Notification.requestPermission();
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('appContainer').classList.remove('hidden');
+            document.getElementById('adminTabBtn').style.display = isAdmin ? 'flex' : 'none';
+            // Show welcome toast
+            if (userDoc && userDoc.name) {
+                showToast(`Welcome back, ${userDoc.name}!`);
+            } else if (isAdmin) {
+                showToast(`Welcome, Admin.`);
+            } else {
+                showToast(`Welcome, Disciple.`);
             }
+            switchTab('home');
+            startListeners();
         } else {
-            loginScreen.style.display = 'flex';
-            appContainer.classList.add('hidden');
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('appContainer').classList.add('hidden');
             if (postsUnsub) postsUnsub();
             if (prayersUnsub) prayersUnsub();
+            if (challengesUnsub) challengesUnsub();
+            if (testimonialsUnsub) testimonialsUnsub();
         }
     });
 
-    // -------------------- Firestore Listeners --------------------
+    // Firestore listeners
+    let postsUnsub = null, prayersUnsub = null, challengesUnsub = null, testimonialsUnsub = null;
     function startListeners() {
         if (postsUnsub) postsUnsub();
         postsUnsub = db.collection('posts').orderBy('timestamp', 'desc').limit(30).onSnapshot(() => {
@@ -426,36 +400,54 @@
         prayersUnsub = db.collection('prayers').orderBy('timestamp', 'desc').onSnapshot(() => {
             if (currentTab === 'prayer') renderPrayerWall();
         });
+        if (challengesUnsub) challengesUnsub();
+        // Private challenges: users see only their own; admin sees all
+        let challengesQuery = db.collection('challenges');
+        if (!isAdmin && currentUser) {
+            challengesQuery = challengesQuery.where('userId', '==', currentUser.uid);
+        }
+        challengesUnsub = challengesQuery.orderBy('timestamp', 'desc').onSnapshot(() => {
+            if (currentTab === 'challenges') renderChallenges();
+        });
+        if (testimonialsUnsub) testimonialsUnsub();
+        testimonialsUnsub = db.collection('testimonials').orderBy('timestamp', 'desc').onSnapshot(() => {
+            if (currentTab === 'testimonials') renderTestimonials();
+        });
     }
 
-    // -------------------- Render Functions --------------------
+    // ========== RENDER FUNCTIONS ==========
     async function renderHome() {
-        // Get daily devotional from Firestore (or local fallback)
-        const doc = await db.collection('settings').doc('dailyVerse').get();
+        const verseDoc = await db.collection('settings').doc('dailyVerse').get();
         let verse = { ref: 'Psalm 118:24', text: 'This is the day the Lord has made; let us rejoice and be glad in it.' };
-        if (doc.exists) verse = doc.data();
+        if (verseDoc.exists) verse = verseDoc.data();
+        const welcomeName = userDoc?.name ? userDoc.name : (isAdmin ? 'Admin' : 'Disciple');
         const html = `
+            <div class="card">
+                <h2>🙏 Hello, ${escapeHtml(welcomeName)}</h2>
+                <p>Welcome to your spiritual home. May you find peace, purpose, and intimacy with the Father.</p>
+            </div>
             <div class="card">
                 <h3>📖 Daily Verse</h3>
                 <p style="font-style: italic; margin: 12px 0;">“${escapeHtml(verse.text)}”</p>
                 <p style="text-align: right;">— ${escapeHtml(verse.ref)}</p>
             </div>
             <div class="card">
-                <h3>🙏 Word of Encouragement</h3>
-                <p>You are chosen, loved, and never alone. God is doing a new thing in you.</p>
+                <h3>🌟 Today's Encouragement</h3>
+                <p>You are not alone. God is with you, and this community is praying for you.</p>
             </div>
             <div class="card">
-                <h3>🎶 Worship Moment</h3>
-                <p><i class="fas fa-headphones"></i> “Gratitude” – Brandon Lake</p>
+                <h3>🎵 Worship Moment</h3>
+                <p><i class="fas fa-headphones"></i> “Way Maker” – Sinach</p>
             </div>
         `;
         document.getElementById('mainContent').innerHTML = html;
     }
 
+    // Feed (same as before)
     async function renderFeed() {
         const snapshot = await db.collection('posts').orderBy('timestamp', 'desc').limit(30).get();
         if (snapshot.empty) {
-            document.getElementById('mainContent').innerHTML = '<div class="card">No posts yet. Admin will share devotionals soon.</div>';
+            document.getElementById('mainContent').innerHTML = '<div class="card">No posts yet. Admin will share soon.</div>';
             return;
         }
         let html = '';
@@ -486,43 +478,42 @@
         document.getElementById('mainContent').innerHTML = html;
         attachFeedEvents();
     }
-
     function attachFeedEvents() {
         document.querySelectorAll('.like-post').forEach(btn => {
-            btn.addEventListener('click', async () => {
+            btn.onclick = async () => {
                 const id = btn.dataset.id;
-                const postRef = db.collection('posts').doc(id);
-                await postRef.update({ likes: firebase.firestore.FieldValue.increment(1) });
-            });
+                await db.collection('posts').doc(id).update({ likes: firebase.firestore.FieldValue.increment(1) });
+            };
         });
         document.querySelectorAll('.comment-toggle').forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.onclick = () => {
                 const id = btn.dataset.id;
                 const sec = document.getElementById(`comments-${id}`);
                 sec.classList.toggle('hidden');
-            });
+            };
         });
         document.querySelectorAll('.submit-comment').forEach(btn => {
-            btn.addEventListener('click', async () => {
+            btn.onclick = async () => {
                 const id = btn.dataset.id;
                 const input = document.getElementById(`commentInput-${id}`);
                 const text = input.value.trim();
                 if (!text) return;
-                const name = currentUser.email?.split('@')[0] || 'Disciple';
-                const comment = { name, text, timestamp: new Date().toISOString() };
-                const postRef = db.collection('posts').doc(id);
-                await postRef.update({ comments: firebase.firestore.FieldValue.arrayUnion(comment) });
+                const name = userDoc?.name || (isAdmin ? 'Admin' : 'Disciple');
+                await db.collection('posts').doc(id).update({
+                    comments: firebase.firestore.FieldValue.arrayUnion({ name, text, timestamp: new Date().toISOString() })
+                });
                 input.value = '';
-            });
+            };
         });
     }
 
+    // Prayer Wall (same as before)
     async function renderPrayerWall() {
         const snapshot = await db.collection('prayers').orderBy('timestamp', 'desc').get();
         let html = `
             <div class="card">
                 <h3>🕯️ Submit a Prayer Request</h3>
-                <input type="text" id="prayerName" placeholder="Your name (optional)">
+                <input type="text" id="prayerName" placeholder="Your name (optional)" value="${escapeHtml(userDoc?.name || '')}">
                 <textarea id="prayerText" rows="3" placeholder="What can we pray about?"></textarea>
                 <button id="submitPrayer">Submit</button>
             </div>
@@ -531,7 +522,7 @@
         document.getElementById('mainContent').innerHTML = html;
         const listDiv = document.getElementById('prayerList');
         if (snapshot.empty) {
-            listDiv.innerHTML = '<div class="card">No prayer requests yet. Be the first.</div>';
+            listDiv.innerHTML = '<div class="card">Be the first to share a prayer request.</div>';
         } else {
             let prayersHtml = '';
             snapshot.forEach(doc => {
@@ -554,31 +545,30 @@
             const text = document.getElementById('prayerText').value.trim();
             if (!text) return;
             await db.collection('prayers').add({
-                name: name || 'Anonymous',
+                name: name || (userDoc?.name || 'Anonymous'),
                 text,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 prayCount: 0
             });
             document.getElementById('prayerText').value = '';
+            showToast('Prayer request submitted.');
         });
         document.querySelectorAll('.pray-for').forEach(btn => {
-            btn.addEventListener('click', async () => {
+            btn.onclick = async () => {
                 const id = btn.dataset.id;
                 await db.collection('prayers').doc(id).update({ prayCount: firebase.firestore.FieldValue.increment(1) });
-            });
+            };
         });
     }
 
-    // Journal (private per user – stored in Firestore subcollection)
+    // Journal (private per user)
     async function renderJournal() {
-        const user = auth.currentUser;
-        if (!user) return;
-        const snapshot = await db.collection('users').doc(user.uid).collection('journal').orderBy('timestamp', 'desc').get();
+        const snapshot = await db.collection('users').doc(currentUser.uid).collection('journal').orderBy('timestamp', 'desc').get();
         let html = `
             <div class="card">
                 <h3>📔 Personal Journal</h3>
                 <input type="text" id="journalTitle" placeholder="Title">
-                <textarea id="journalContent" rows="4" placeholder="Write your thoughts, prayers..."></textarea>
+                <textarea id="journalContent" rows="4" placeholder="Write your thoughts, prayers, reflections..."></textarea>
                 <button id="addJournalEntry">Save Entry</button>
             </div>
             <div id="journalList"></div>
@@ -606,20 +596,149 @@
             const title = document.getElementById('journalTitle').value.trim();
             const content = document.getElementById('journalContent').value.trim();
             if (!title || !content) return alert('Please fill both');
-            await db.collection('users').doc(user.uid).collection('journal').add({
+            await db.collection('users').doc(currentUser.uid).collection('journal').add({
                 title, content, timestamp: firebase.firestore.FieldValue.serverTimestamp()
             });
             renderJournal();
+            showToast('Journal entry saved.');
         });
         document.querySelectorAll('.delete-journal').forEach(btn => {
-            btn.addEventListener('click', async () => {
-                await db.collection('users').doc(user.uid).collection('journal').doc(btn.dataset.id).delete();
+            btn.onclick = async () => {
+                await db.collection('users').doc(currentUser.uid).collection('journal').doc(btn.dataset.id).delete();
                 renderJournal();
-            });
+            };
         });
     }
 
-    // Admin Panel
+    // Connect Tab (WhatsApp, Instagram, Website)
+    function renderConnect() {
+        const html = `
+            <div class="card">
+                <h3>📱 Connect With Us</h3>
+                <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 20px;">
+                    <a href="https://whatsapp.com/channel/0029Vb7dH5k0wajp7QiO6A2m" target="_blank" style="color: var(--secondary); text-decoration: none; font-size: 1.1rem;"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a>
+                    <a href="https://www.instagram.com/dominion_outreach/?hl=en" target="_blank" style="color: var(--primary); text-decoration: none; font-size: 1.1rem;"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="https://favour-37.github.io/Dominion-Outreach/" target="_blank" style="color: var(--text); text-decoration: none; font-size: 1.1rem;"><i class="fas fa-globe"></i> Our Website</a>
+                    <a href="mailto:dominionoutreachofficial@gmail.com" style="color: var(--accent); text-decoration: none; font-size: 1.1rem;"><i class="fas fa-envelope"></i> Email Support</a>
+                </div>
+            </div>
+            <div class="card">
+                <h3>🌟 Share Your Testimony</h3>
+                <textarea id="testimonyText" rows="3" placeholder="Write your testimony..."></textarea>
+                <button id="submitTestimony">Share Testimony</button>
+            </div>
+            <div id="testimonialsList"></div>
+        `;
+        document.getElementById('mainContent').innerHTML = html;
+        renderTestimonials(); // load existing testimonials
+        document.getElementById('submitTestimony')?.addEventListener('click', async () => {
+            const text = document.getElementById('testimonyText').value.trim();
+            if (!text) return;
+            await db.collection('testimonials').add({
+                text: text,
+                name: userDoc?.name || (isAdmin ? 'Admin' : 'Disciple'),
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                likes: 0
+            });
+            document.getElementById('testimonyText').value = '';
+            showToast('Thank you for sharing your testimony!');
+        });
+    }
+
+    async function renderTestimonials() {
+        const snapshot = await db.collection('testimonials').orderBy('timestamp', 'desc').get();
+        const container = document.getElementById('testimonialsList');
+        if (!container) return;
+        if (snapshot.empty) {
+            container.innerHTML = '<div class="card">No testimonies yet. Be the first to share God’s goodness!</div>';
+            return;
+        }
+        let html = '';
+        snapshot.forEach(doc => {
+            const t = doc.data();
+            html += `
+                <div class="card">
+                    <div><strong>${escapeHtml(t.name)}</strong> <span style="font-size:0.75rem;">${new Date(t.timestamp?.toDate()).toLocaleDateString()}</span></div>
+                    <p style="margin-top: 8px;">"${escapeHtml(t.text)}"</p>
+                    <button class="like-testimony" data-id="${doc.id}">❤️ ${t.likes || 0}</button>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+        document.querySelectorAll('.like-testimony').forEach(btn => {
+            btn.onclick = async () => {
+                await db.collection('testimonials').doc(btn.dataset.id).update({ likes: firebase.firestore.FieldValue.increment(1) });
+            };
+        });
+    }
+
+    // Private Challenges (only user sees own, admin sees all and can reply)
+    async function renderChallenges() {
+        let query = db.collection('challenges');
+        if (!isAdmin) {
+            query = query.where('userId', '==', currentUser.uid);
+        }
+        const snapshot = await query.orderBy('timestamp', 'desc').get();
+        let html = `
+            <div class="card">
+                <h3>🔒 Private Prayer / Challenge</h3>
+                <p>Share something only the admin can see. We will reply to you privately.</p>
+                <textarea id="challengeText" rows="3" placeholder="What’s on your heart?"></textarea>
+                <button id="submitChallenge">Submit (Private)</button>
+            </div>
+            <div id="challengesList"></div>
+        `;
+        document.getElementById('mainContent').innerHTML = html;
+        const listDiv = document.getElementById('challengesList');
+        if (snapshot.empty) {
+            listDiv.innerHTML = '<div class="card">No private entries yet. You can share anything here.</div>';
+        } else {
+            let challengesHtml = '';
+            snapshot.forEach(doc => {
+                const c = doc.data();
+                challengesHtml += `
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between;">
+                            <strong>${new Date(c.timestamp?.toDate()).toLocaleString()}</strong>
+                            ${isAdmin ? `<span>From: ${escapeHtml(c.userName)}</span>` : ''}
+                        </div>
+                        <p style="margin-top: 8px;">${escapeHtml(c.text)}</p>
+                        ${c.reply ? `<div class="reply-box"><strong>Admin reply:</strong> ${escapeHtml(c.reply)}</div>` : ''}
+                        ${isAdmin && !c.reply ? `
+                            <textarea id="reply-${doc.id}" placeholder="Write a reply..."></textarea>
+                            <button class="reply-challenge" data-id="${doc.id}">Send Reply</button>
+                        ` : ''}
+                    </div>
+                `;
+            });
+            listDiv.innerHTML = challengesHtml;
+        }
+        document.getElementById('submitChallenge')?.addEventListener('click', async () => {
+            const text = document.getElementById('challengeText').value.trim();
+            if (!text) return;
+            await db.collection('challenges').add({
+                userId: currentUser.uid,
+                userName: userDoc?.name || (isAdmin ? 'Admin' : 'Disciple'),
+                text: text,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                reply: null
+            });
+            document.getElementById('challengeText').value = '';
+            showToast('Your private message has been sent to the admin.');
+        });
+        document.querySelectorAll('.reply-challenge').forEach(btn => {
+            btn.onclick = async () => {
+                const id = btn.dataset.id;
+                const replyText = document.getElementById(`reply-${id}`).value.trim();
+                if (!replyText) return;
+                await db.collection('challenges').doc(id).update({ reply: replyText });
+                showToast('Reply sent (user will see it).');
+                renderChallenges();
+            };
+        });
+    }
+
+    // Admin Panel (same as before, plus view all challenges, testimonials, etc.)
     async function renderAdmin() {
         let html = `
             <div class="card">
@@ -633,6 +752,7 @@
             <div id="adminPostsList"></div>
         `;
         document.getElementById('mainContent').innerHTML = html;
+        // Load existing posts
         const postsSnapshot = await db.collection('posts').orderBy('timestamp', 'desc').get();
         let postsHtml = '<h3>Manage Posts</h3>';
         postsSnapshot.forEach(doc => {
@@ -654,7 +774,7 @@
             let mediaUrl = null, mediaType = null;
             const statusDiv = document.getElementById('uploadStatus');
             if (file) {
-                statusDiv.innerText = 'Uploading media...';
+                statusDiv.innerText = 'Uploading...';
                 const formData = new FormData();
                 formData.append('file', file);
                 formData.append('upload_preset', UPLOAD_PRESET);
@@ -663,10 +783,7 @@
                     const data = await res.json();
                     mediaUrl = data.secure_url;
                     mediaType = file.type.startsWith('image/') ? 'image' : 'video';
-                    statusDiv.innerText = 'Upload complete!';
-                } catch (err) {
-                    statusDiv.innerText = 'Upload failed';
-                }
+                } catch (err) {}
             }
             await db.collection('posts').add({
                 title, content, mediaUrl, mediaType,
@@ -678,31 +795,48 @@
             renderAdmin();
         });
         document.querySelectorAll('.delete-post').forEach(btn => {
-            btn.addEventListener('click', async () => {
+            btn.onclick = async () => {
                 if (confirm('Delete this post?')) await db.collection('posts').doc(btn.dataset.id).delete();
                 renderAdmin();
-            });
+            };
         });
     }
 
-    // Tab Switching
-    async function switchTab(tab) {
+    // Tab switching
+    function switchTab(tab) {
         currentTab = tab;
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add('active');
-        if (tab === 'home') await renderHome();
-        else if (tab === 'feed') await renderFeed();
-        else if (tab === 'prayer') await renderPrayerWall();
-        else if (tab === 'journal') await renderJournal();
-        else if (tab === 'admin' && isAdmin) await renderAdmin();
+        if (tab === 'home') renderHome();
+        else if (tab === 'feed') renderFeed();
+        else if (tab === 'prayer') renderPrayerWall();
+        else if (tab === 'journal') renderJournal();
+        else if (tab === 'connect') renderConnect();
+        else if (tab === 'challenges') renderChallenges();
+        else if (tab === 'testimonials') renderTestimonials();
+        else if (tab === 'admin' && isAdmin) renderAdmin();
     }
+
+    // Add Challenges & Testimonials tabs to tab bar dynamically
+    const tabBar = document.getElementById('tabBar');
+    const challengesTab = document.createElement('button');
+    challengesTab.className = 'tab-btn';
+    challengesTab.setAttribute('data-tab', 'challenges');
+    challengesTab.innerHTML = '<i class="fas fa-lock"></i><span>Challenges</span>';
+    tabBar.appendChild(challengesTab);
+    const testimonialsTab = document.createElement('button');
+    testimonialsTab.className = 'tab-btn';
+    testimonialsTab.setAttribute('data-tab', 'testimonials');
+    testimonialsTab.innerHTML = '<i class="fas fa-star"></i><span>Testimonies</span>';
+    tabBar.appendChild(testimonialsTab);
 
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', () => switchTab(btn.dataset.tab));
     });
 
-    // Service Worker for offline & installability
+    // Service Worker for PWA
     if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(console.warn);
         const swCode = `self.addEventListener('install', e => e.waitUntil(caches.open('do-v1').then(c => c.addAll(['/','/index.html']))));
 self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));`;
         const blob = new Blob([swCode], {type: 'application/javascript'});
